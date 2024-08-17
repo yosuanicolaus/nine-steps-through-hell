@@ -4,11 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cvsb4pnpkqms3" path="res://proto-circle-of-fifth.png" id="1_8q141"]
 [ext_resource type="PackedScene" uid="uid://bfap0vi8mughm" path="res://player.tscn" id="3_qku0a"]
 [ext_resource type="Script" path="res://scripts/conductor.gd" id="4_2apkg"]
-[ext_resource type="AudioStream" uid="uid://domeyl6snqnu8" path="res://music/example_music.mp3" id="4_mfd71"]
+[ext_resource type="AudioStream" uid="uid://gm02nsxqv73j" path="res://music/clock_tick_100bpm.wav" id="4_7qvwf"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6xdhs")
-bpm = 120
 
 [node name="background" type="Sprite2D" parent="."]
 scale = Vector2(0.92, 0.92)
@@ -25,7 +24,8 @@ texture = ExtResource("1_8q141")
 [node name="OpenTimer" type="Timer" parent="."]
 
 [node name="Conductor" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_mfd71")
+stream = ExtResource("4_7qvwf")
 autoplay = true
 script = ExtResource("4_2apkg")
-song_bpm = 120.0
+
+[node name="Metronome" type="AudioStreamPlayer" parent="."]

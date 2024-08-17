@@ -10,3 +10,7 @@ script = ExtResource("1_pnuia")
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_8lk7s")
 offset = Vector2(0, -500)
+
+[node name="CloseTimer" type="Timer" parent="."]
+
+[node name="OpenTimer" type="Timer" parent="."]
