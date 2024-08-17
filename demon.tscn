@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdrtn0cm3n100"]
+
+[ext_resource type="Script" path="res://demon.gd" id="1_8adef"]
+[ext_resource type="Texture2D" uid="uid://b3j222qj71d00" path="res://art/proto_player.png" id="2_gknlc"]
+
+[node name="Demon" type="Node2D"]
+script = ExtResource("1_8adef")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.54902, 0.196078, 0.196078, 1)
+position = Vector2(0, -450)
+scale = Vector2(0.260954, 0.260954)
+texture = ExtResource("2_gknlc")
+
+[node name="CloseTimer" type="Timer" parent="."]
+
+[node name="OpenTimer" type="Timer" parent="."]

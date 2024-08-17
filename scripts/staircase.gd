@@ -55,17 +55,41 @@ var panel_statuses: Array[PanelStatus] = [
 	PanelStatus.Empty,
 ]
 
-var top_panel_idx := 6
+var top_panel_id := 6 # top panel ID (not idx!) <int>1~12
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	update_panel_sprite_texture()
-	update_panel_sprite_modulate()
+	_update_panel_sprite_texture()
+	_update_panel_sprite_modulate()
 
 
-func update_panel_sprite_modulate() -> void:
-	var to_fill_idx = top_panel_idx
+func update_from_player_action(player: Player) -> void:
+	# based on player's current panel, update top_panel
+	print("update_from_player_action ", player)
+
+
+func build_panel(card_idx: int) -> void:
+	assert(card_idx >= 0 and card_idx <= 4, "card_idx must be between 0 - 4!")
+	var to_build_idx = top_panel_id
+	if to_build_idx == 12:
+		to_build_idx = 0
+
+	var new_panel_status: PanelStatus = {
+		0: PanelStatus.Normal,
+		1: PanelStatus.Cracked,
+		2: PanelStatus.Holy,
+		3: PanelStatus.Dark,
+		4: PanelStatus.Gap,
+	}[card_idx]
+	panel_statuses[to_build_idx] = new_panel_status
+	top_panel_id = to_build_idx + 1
+	_update_panel_sprite_texture()
+	_update_panel_sprite_modulate()
+
+
+func _update_panel_sprite_modulate() -> void:
+	var to_fill_idx = top_panel_id
 	if to_fill_idx == 12:
 		to_fill_idx = 0
 
@@ -77,9 +101,9 @@ func update_panel_sprite_modulate() -> void:
 			to_fill_idx = 0
 
 
-func update_panel_sprite_texture() -> void:
+func _update_panel_sprite_texture() -> void:
 	for i in 12:
-		if i + 1 == top_panel_idx:
+		if i + 1 == top_panel_id:
 			panel_sprites[i].texture = panel_sprite_top_map[panel_statuses[i]]
 		else:
 			panel_sprites[i].texture = panel_sprite_map[panel_statuses[i]]
