@@ -1,196 +1,90 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8arvi67b661s"]
+[gd_scene load_steps=3 format=3 uid="uid://b8arvi67b661s"]
 
-[ext_resource type="Texture2D" uid="uid://baqc86tpbiini" path="res://art/staircase_tile_normal.png" id="1_vj7yl"]
+[ext_resource type="Texture2D" uid="uid://q3q1ffxndtjv" path="res://art/staircase_tile_normal_mirror.png" id="1_6eaj8"]
+[ext_resource type="Script" path="res://scripts/staircase.gd" id="1_o5o1c"]
 
 [node name="Staircase" type="Node2D"]
+script = ExtResource("1_o5o1c")
 
-[node name="Anchor13" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 0.271915
+[node name="Anchor" type="Node2D" parent="."]
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor13"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor25" type="Node2D" parent="."]
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor25"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor26" type="Node2D" parent="."]
+[node name="Anchor2" type="Node2D" parent="."]
 rotation = 0.523599
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor26"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor2"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor27" type="Node2D" parent="."]
+[node name="Anchor3" type="Node2D" parent="."]
 rotation = 1.0472
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor27"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor3"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor28" type="Node2D" parent="."]
+[node name="Anchor4" type="Node2D" parent="."]
 rotation = 1.5708
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor28"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor4"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor29" type="Node2D" parent="."]
+[node name="Anchor5" type="Node2D" parent="."]
 rotation = 2.0944
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor29"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor5"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor30" type="Node2D" parent="."]
+[node name="Anchor6" type="Node2D" parent="."]
 rotation = 2.61799
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor30"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor6"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor31" type="Node2D" parent="."]
+[node name="Anchor7" type="Node2D" parent="."]
 rotation = 3.14159
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor31"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor7"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor32" type="Node2D" parent="."]
+[node name="Anchor8" type="Node2D" parent="."]
 rotation = 3.66519
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor32"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor8"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor33" type="Node2D" parent="."]
+[node name="Anchor9" type="Node2D" parent="."]
 rotation = 4.18879
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor33"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor9"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor34" type="Node2D" parent="."]
+[node name="Anchor10" type="Node2D" parent="."]
 rotation = 4.71239
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor34"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor10"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor35" type="Node2D" parent="."]
+[node name="Anchor11" type="Node2D" parent="."]
 rotation = 5.23599
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor35"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor11"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")
 
-[node name="Anchor36" type="Node2D" parent="."]
+[node name="Anchor12" type="Node2D" parent="."]
 rotation = 5.75959
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor36"]
+[node name="StaircaseTile" type="Sprite2D" parent="Anchor12"]
 position = Vector2(0, -416)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor14" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 0.790855
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor14"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor15" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 1.31674
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor15"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor16" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 1.83596
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor16"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor17" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 2.35366
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor17"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor18" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 2.89152
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor18"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor19" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 3.42064
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor19"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor20" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 3.94709
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor20"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor21" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 4.47704
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor21"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor22" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 5.00116
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor22"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor23" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 5.5219
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor23"]
-position = Vector2(-1.19209e-07, -437)
-texture = ExtResource("1_vj7yl")
-
-[node name="Anchor24" type="Node2D" parent="."]
-visible = false
-position = Vector2(1, 0)
-rotation = 6.03983
-
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor24"]
-position = Vector2(1.22962, -436.567)
-texture = ExtResource("1_vj7yl")
+texture = ExtResource("1_6eaj8")

@@ -1,15 +1,21 @@
 extends Node2D
 
-@export var action_time := 0.2
+@export var action_time := 0.15
 
 var press_beat_idx := -1
 var release_beat_idx := -1
+var last_move_beat_idx := -1
 var success_streak := 0
+
+var cards: Array[int] = [
+	0,  # "skip second" - jump 2 panels ahead
+	0,  # "panel cleanse" - convert currently stepped panel to a holy panel
+	0,  # "halt" - freeze demon chaser for 3 beats
+]
 
 
 func _ready() -> void:
 	print("player instanced")
-	print(Global.bpm)
 
 
 func _process(_delta: float) -> void:
@@ -19,9 +25,12 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_released("press_space"):
 		release_beat_idx = Global.get_current_beat(action_time)
 
-		if press_beat_idx != -1 and release_beat_idx != -1:
+		if press_beat_idx != -1 and release_beat_idx != -1 and last_move_beat_idx != release_beat_idx:
+			last_move_beat_idx = release_beat_idx
 			var jump_length = clamp(release_beat_idx - press_beat_idx, 1, 3)
+			success_streak += 1
 			try_move_player(jump_length)
+
 		press_beat_idx = -1
 
 

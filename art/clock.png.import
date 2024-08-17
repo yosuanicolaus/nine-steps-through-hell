@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjx6fow2nkyfv"
-path="res://.godot/imported/Staircase_tile.png-c8a2e829f5379c6184a9ead6812a725c.ctex"
+uid="uid://11i2mmpjjc11"
+path="res://.godot/imported/clock.png-32853f4185d6c0894e704b8f6dcb0b9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Staircase_tile.png"
-dest_files=["res://.godot/imported/Staircase_tile.png-c8a2e829f5379c6184a9ead6812a725c.ctex"]
+source_file="res://art/clock.png"
+dest_files=["res://.godot/imported/clock.png-32853f4185d6c0894e704b8f6dcb0b9a.ctex"]
 
 [params]
 

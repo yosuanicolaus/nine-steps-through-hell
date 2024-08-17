@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+
 [input]
 
 press_space={
@@ -47,3 +53,4 @@ card_3={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

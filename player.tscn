@@ -9,7 +9,7 @@ script = ExtResource("1_pnuia")
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_8lk7s")
-offset = Vector2(0, -570)
+offset = Vector2(0, -960)
 
 [node name="CloseTimer" type="Timer" parent="."]
 
