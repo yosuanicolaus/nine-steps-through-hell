@@ -2,26 +2,29 @@ extends Node2D
 
 @export var action_time := 0.2
 
-var last_beat_idx := -1
+var press_beat_idx := -1
+var release_beat_idx := -1
 var success_streak := 0
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("player instanced")
 	print(Global.bpm)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press_space"):
-		if Global.get_current_beat(action_time) != -1:
-			try_move_player()
-		print("space press ", Global.timer.time_left)
+		press_beat_idx = Global.get_current_beat(action_time)
+
 	elif Input.is_action_just_released("press_space"):
-		print("space release ", Global.timer.time_left)
+		release_beat_idx = Global.get_current_beat(action_time)
+
+		if press_beat_idx != -1 and release_beat_idx != -1:
+			var jump_length = clamp(release_beat_idx - press_beat_idx, 1, 3)
+			try_move_player(jump_length)
+		press_beat_idx = -1
 
 
-func try_move_player():
-	print(Global.timer.time_left)
-	self.rotation_degrees += 30
+func try_move_player(jump_length: int):
+	print(press_beat_idx, " ",  release_beat_idx, " ", jump_length)
+	self.rotation_degrees += 30 * jump_length
