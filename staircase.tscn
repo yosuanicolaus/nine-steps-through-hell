@@ -1,90 +1,176 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8arvi67b661s"]
+[gd_scene load_steps=4 format=3 uid="uid://b8arvi67b661s"]
 
-[ext_resource type="Texture2D" uid="uid://q3q1ffxndtjv" path="res://art/staircase_tile_normal_mirror.png" id="1_6eaj8"]
+[ext_resource type="Texture2D" uid="uid://q3q1ffxndtjv" path="res://art/staircase_tile_normal.png" id="1_6eaj8"]
 [ext_resource type="Script" path="res://scripts/staircase.gd" id="1_o5o1c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7adb5"]
 
 [node name="Staircase" type="Node2D"]
 script = ExtResource("1_o5o1c")
 
-[node name="Anchor" type="Node2D" parent="."]
+[node name="Panel1" type="Node2D" parent="."]
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor"]
+[node name="Sprite" type="Sprite2D" parent="Panel1"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor2" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel1"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel1/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel2" type="Node2D" parent="."]
 rotation = 0.523599
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor2"]
+[node name="Sprite" type="Sprite2D" parent="Panel2"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor3" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel2"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel2/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel3" type="Node2D" parent="."]
 rotation = 1.0472
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor3"]
+[node name="Sprite" type="Sprite2D" parent="Panel3"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor4" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel3"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel3/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel4" type="Node2D" parent="."]
 rotation = 1.5708
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor4"]
+[node name="Sprite" type="Sprite2D" parent="Panel4"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor5" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel4"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel4/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel5" type="Node2D" parent="."]
 rotation = 2.0944
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor5"]
+[node name="Sprite" type="Sprite2D" parent="Panel5"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor6" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel5"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel5/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel6" type="Node2D" parent="."]
 rotation = 2.61799
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor6"]
+[node name="Sprite" type="Sprite2D" parent="Panel6"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor7" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel6"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel6/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel7" type="Node2D" parent="."]
 rotation = 3.14159
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor7"]
+[node name="Sprite" type="Sprite2D" parent="Panel7"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor8" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel7"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel7/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel8" type="Node2D" parent="."]
 rotation = 3.66519
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor8"]
+[node name="Sprite" type="Sprite2D" parent="Panel8"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor9" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel8"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel8/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel9" type="Node2D" parent="."]
 rotation = 4.18879
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor9"]
+[node name="Sprite" type="Sprite2D" parent="Panel9"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor10" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel9"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel9/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel10" type="Node2D" parent="."]
 rotation = 4.71239
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor10"]
+[node name="Sprite" type="Sprite2D" parent="Panel10"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor11" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel10"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel10/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel11" type="Node2D" parent="."]
 rotation = 5.23599
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor11"]
+[node name="Sprite" type="Sprite2D" parent="Panel11"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
-[node name="Anchor12" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Panel11"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel11/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")
+
+[node name="Panel12" type="Node2D" parent="."]
 rotation = 5.75959
 
-[node name="StaircaseTile" type="Sprite2D" parent="Anchor12"]
+[node name="Sprite" type="Sprite2D" parent="Panel12"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
+
+[node name="Area2D" type="Area2D" parent="Panel12"]
+position = Vector2(0, -416)
+scale = Vector2(6.10042, 6.10042)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel12/Area2D"]
+shape = SubResource("RectangleShape2D_7adb5")

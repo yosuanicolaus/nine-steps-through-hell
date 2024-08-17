@@ -33,5 +33,5 @@ func get_current_beat(action_time: float) -> int:
 
 
 func _make_beat():
-	print("GLOBAL: beat ", beat_idx )
+	# print("GLOBAL: beat ", beat_idx )
 	beat_idx += 1
