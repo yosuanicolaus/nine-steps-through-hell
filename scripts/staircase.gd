@@ -28,7 +28,7 @@ enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
 	PanelStatus.Dark: preload('res://art/staircase_tile_dark.png'),
 	PanelStatus.Gap: preload('res://art/staircase_tile_gap.png'),
 	PanelStatus.Cracked: preload('res://art/staircase_tile_holy.png'),
-	PanelStatus.Empty: preload('res://art/staircase_tile_gap.png'),
+	PanelStatus.Empty: preload('res://art/staircase_tile_empty.png'),
 }
 
 @onready var panel_sprite_top_map := {
@@ -37,7 +37,7 @@ enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
 	PanelStatus.Dark: preload('res://art/staircase_tile_dark_top.png'),
 	PanelStatus.Gap: preload('res://art/staircase_tile_gap_top.png'),
 	PanelStatus.Cracked: preload('res://art/staircase_tile_holy_top.png'),
-	PanelStatus.Empty: preload('res://art/staircase_tile_gap_top.png'),
+	PanelStatus.Empty: preload('res://art/staircase_tile_empty.png'),
 }
 
 var panel_statuses: Array[PanelStatus] = [

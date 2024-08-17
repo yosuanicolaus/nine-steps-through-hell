@@ -1,6 +1,7 @@
 extends Sprite2D
 
 
+var next_rotate_backward := false
 @onready var clock_hand := $ClockHand
 
 
@@ -15,4 +16,8 @@ func _ready() -> void:
 	# pass
 
 func _rotate_hand() -> void:
-	clock_hand.rotation_degrees += 30
+	if next_rotate_backward:
+		next_rotate_backward = false
+		clock_hand.rotation_degrees -= 30
+	else:
+		clock_hand.rotation_degrees += 30

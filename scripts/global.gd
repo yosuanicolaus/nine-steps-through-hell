@@ -24,7 +24,10 @@ func _process(_delta: float) -> void:
 
 
 func get_current_beat(action_time: float) -> int:
-	# returns beat_idx if action_time is in beat, otherwise -1
+	# returns either:
+	# beat_idx if action_time is in beat
+	# -2 if action_time is near the middle of the beat
+	# -1 (failed action beat)
 	if timer.time_left <= action_time:
 		return beat_idx
 	elif beat_wait_time - timer.time_left <= action_time:
