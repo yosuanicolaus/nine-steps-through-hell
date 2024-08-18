@@ -43,7 +43,7 @@ func _ready() -> void:
 	# pass
 
 
-func trigger_enter_level(level_goal: String) -> void:
+func modify_clock_lights_from_goal(level_goal: String) -> void:
 	# level_goal is a string of length 12 consisting of either "-", "h", "d", ...
 	for i in 12:
 		var light_node := self.light_nodes[i]

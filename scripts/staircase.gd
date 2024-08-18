@@ -18,21 +18,22 @@ var state: StaircaseState = StaircaseState.InBetween
 
 @onready var panel_sprite_map := {
 	PanelStatus.Normal: preload('res://art/staircase_tile_normal.png'),
-	PanelStatus.Holy: preload('res://art/staircase_tile_cracked.png'),
+	PanelStatus.Holy: preload('res://art/staircase_tile_holy.png'),
 	PanelStatus.Dark: preload('res://art/staircase_tile_dark.png'),
 	PanelStatus.Gap: preload('res://art/staircase_tile_gap.png'),
-	PanelStatus.Cracked: preload('res://art/staircase_tile_holy.png'),
-	PanelStatus.Empty: preload('res://art/empty_sprite.png'),
-	PanelStatus.Fade: preload('res://art/staircase_tile_empty.png')
+	PanelStatus.Cracked: preload('res://art/staircase_tile_cracked.png'),
+	PanelStatus.Empty: preload('res://art/staircase_tile_empty.png'),
+	PanelStatus.Fade: preload('res://art/staircase_tile_fade.png'),
 }
 
 @onready var panel_sprite_top_map := {
 	PanelStatus.Normal: preload('res://art/staircase_tile_normal_top.png'),
-	PanelStatus.Holy: preload('res://art/staircase_tile_cracked_top.png'),
+	PanelStatus.Holy: preload('res://art/staircase_tile_holy_top.png'),
 	PanelStatus.Dark: preload('res://art/staircase_tile_dark_top.png'),
 	PanelStatus.Gap: preload('res://art/staircase_tile_gap_top.png'),
-	PanelStatus.Cracked: preload('res://art/staircase_tile_holy_top.png'),
-	PanelStatus.Empty: preload('res://art/empty_sprite.png'),
+	PanelStatus.Cracked: preload('res://art/staircase_tile_cracked_top.png'),
+	PanelStatus.Empty: preload('res://art/staircase_tile_empty.png'),
+	PanelStatus.Fade: preload('res://art/staircase_tile_fade.png'),
 }
 
 var panel_statuses: Array[PanelStatus] = [
@@ -54,25 +55,27 @@ func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
 	assert(card_idx >= 0 and card_idx <= 4, "card_idx must be between 0 - 4!")
 	return {
 		0: PanelStatus.Normal,
-		1: PanelStatus.Cracked,
-		2: PanelStatus.Holy,
-		3: PanelStatus.Dark,
-		4: PanelStatus.Gap,
+		1: PanelStatus.Holy,
+		2: PanelStatus.Dark,
+		3: PanelStatus.Gap,
+		4: PanelStatus.Cracked,
 	}[card_idx]
 
 
-func is_level_complete(level_goal: String) -> bool:
-	if self.state == StaircaseState.InLevel:
-		for i in 12:
-			var goal_status = {
-				"-": PanelStatus.Normal,
-				"h": PanelStatus.Holy,
-				"d": PanelStatus.Dark,
-			}[level_goal[i]]
-			if goal_status != panel_statuses[i]:
-				return false
-		return true  # level complete if InLevel, and all panel status is same as goal status
-	return false
+func is_puzzle_complete(level_goal: String) -> bool:
+	if not self.state == StaircaseState.InLevel:
+		return false
+
+	for i in 12:
+		var goal_status = {
+			"-": PanelStatus.Normal,
+			"h": PanelStatus.Holy,
+			"d": PanelStatus.Dark,
+		}[level_goal[i]]
+		print("i: ", i, ", goal_status: ", goal_status, ", panelstatus: ", panel_statuses[i])
+		if goal_status != panel_statuses[i]:
+			return false
+	return true  # level complete if InLevel, and all panel status is same as goal status
 
 
 func build_panel_on_clock_hand(clock: Clock, card_idx: int) -> void:
@@ -119,7 +122,18 @@ func trigger_exiting_level(player_panel_id: int) -> void:
 	if opposite_panel_idx >= 12:
 		opposite_panel_idx -= 12
 	panel_statuses[opposite_panel_idx] = PanelStatus.Normal
+	panel_sprites[opposite_panel_idx].get_child(0).energy = 3
 	_update_panel_sprite_texture()
+
+
+func trigger_global_freeze() -> void:
+	Global.in_freeze = true
+	for i in 12:
+		panel_sprites[i].modulate = Color(10, 10, 10, 1)
+	await get_tree().create_timer(1.0).timeout
+	for i in 12:
+		panel_sprites[i].modulate = Color(1, 1, 1, 1)
+	Global.in_freeze = false
 
 
 func _update_panel_sprite_modulate() -> void:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk6pt0na1gama"
-path="res://.godot/imported/empty_sprite.png-5a191c8f7f848544438ec675f3ea0dd0.ctex"
+uid="uid://bhonnh3aw6p7q"
+path="res://.godot/imported/staircase_tile_fade.png-b514fff5277fcfa6fa52dfd09530d210.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/empty_sprite.png"
-dest_files=["res://.godot/imported/empty_sprite.png-5a191c8f7f848544438ec675f3ea0dd0.ctex"]
+source_file="res://art/staircase_tile_fade.png"
+dest_files=["res://.godot/imported/staircase_tile_fade.png-b514fff5277fcfa6fa52dfd09530d210.ctex"]
 
 [params]
 
