@@ -12,9 +12,9 @@ var next_rotate_backward := false
 	$Light7, $Light8, $Light9, $Light10, $Light11, $Light12,
 ]
 
-@onready var player: Player = $Rotator/Player
+@onready var player: Player = get_node("../Player")
 
-enum LightStatus {Off, Holy, Dartrigger_in_levelk}
+enum LightStatus {Off, Holy, Dark}
 
 var light_statuses: Array[LightStatus] = [
 	LightStatus.Off, LightStatus.Off, LightStatus.Off, LightStatus.Off, LightStatus.Off, LightStatus.Off,
@@ -32,17 +32,28 @@ var clock2_panel_id := 7:
 		if val > 12:
 			clock2_panel_id -= 12
 var clock2_cycle := true
+var light_energy := 2
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player.signal_player_control.connect(_on_player_half_beat)
+	player.signal_player_move.connect(_on_player_move)
 	Global.timer.timeout.connect(_on_global_beat)
 	Global.signal_global_state_change.connect(_on_global_state_change)
 
 
 func _on_player_half_beat():
 	self.next_rotate_backward = true
+
+
+func _on_player_move(_move_sign: int, _current_panel_id: int):
+	pass
+	# if player_level in self.level_levels and self.last_trigger != player_level:
+	# 	# make sure only triggers once by setting & checking last_trigger
+	# 	staircase.trigger_enter_level()
+	# 	clock.modify_clock_lights_from_goal(level_goals[current_level_idx][current_puzzle_idx])
+	# 	self.last_trigger = player_level
 
 
 func _on_global_state_change() -> void:
@@ -59,18 +70,27 @@ func _on_global_state_change() -> void:
 	# pass
 
 
+func _set_light_status(idx: int, light_status: LightStatus) -> void:
+	self.light_statuses[idx] = light_status
+	if light_status == LightStatus.Off:
+		self.light_nodes[idx].energy = 0
+	elif light_status == LightStatus.Holy:
+		self.light_nodes[idx].energy = self.light_energy
+		self.light_nodes[idx].color = Color(1, 1, 0, 1)
+	elif light_status == LightStatus.Dark:
+		self.light_nodes[idx].energy = self.light_energy
+		self.light_nodes[idx].color = Color(1, 0, 1, 1)
+
+
 func modify_clock_lights_from_goal(level_goal: String) -> void:
 	# level_goal is a string of length 12 consisting of either "-", "h", "d", ...
 	for i in 12:
-		var light_node := self.light_nodes[i]
 		if level_goal[i] == "-":
-			light_node.energy = 0
+			self._set_light_status(i, LightStatus.Off)
 		elif level_goal[i] == "h": # holy -> yellow
-			light_node.energy = 2
-			light_node.color = Color(1, 1, 0, 1)
+			self._set_light_status(i, LightStatus.Holy)
 		elif level_goal[i] == "d": # dark -> purple
-			light_node.energy = 2
-			light_node.color = Color(1, 0, 1, 1)
+			self._set_light_status(i, LightStatus.Dark)
 
 
 func _set_clock_lights_off() -> void:

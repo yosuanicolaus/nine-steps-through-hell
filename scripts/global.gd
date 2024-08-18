@@ -20,10 +20,10 @@ var state: State = State.InBetween:
 	set(new_state):
 		state = new_state
 		if state == State.Exiting:
-			pass
-		elif state == State.InBetween:
 			current_level_idx += 1
 			current_puzzle_idx = 0
+		elif state == State.InBetween:
+			pass
 		else: # state == State.InLevel
 			pass
 		signal_global_state_change.emit()
@@ -70,6 +70,13 @@ func get_current_beat(action_time: float) -> int:
 
 func get_current_level_goal() -> String:
 	return self.level_goals[self.current_level_idx][self.current_puzzle_idx]
+
+
+func increment_current_level_puzzle() -> void:
+	self.current_puzzle_idx += 1
+	if self.current_puzzle_idx == 3:
+		self.current_level_idx += 1
+		self.current_puzzle_idx = 0
 
 
 func _make_beat():

@@ -48,27 +48,59 @@ var in_between_idx = 0
 func _ready() -> void:
 	Global.signal_global_state_change.connect(_on_global_state_change)
 	player.signal_player_move.connect(_on_player_move)
-	_update_panel_sprite_texture()
-	_update_panel_sprite_modulate()
+	player.signal_player_play_card.connect(_on_player_play_card)
+	_update_panel_textures()
+	_update_panel_lights_dark_to_light()
 
 
 func _on_global_state_change() -> void:
 	if Global.state == Global.State.Exiting:
 		pass
 	elif Global.state == Global.State.InBetween:
-		pass
+		var empty_panel_idx = self.top_panel_id - 1 + 11
+		empty_panel_idx %= 12
+		self.top_panel_id -= 2
+		if self.top_panel_id < 1:
+			self.top_panel_id += 12
+		self.top_panel_id = self.top_panel_id
+
+		self.panel_statuses[empty_panel_idx] = PanelStatus.Empty
+		self._update_panel_textures()
+		self._update_panel_lights_dark_to_light()
 	else: # InLevel
-		pass
+		for i in 12:
+			panel_sprites[i].get_child(0).energy = 1
+			panel_sprites[i].modulate = Color(1, 1, 1, 1)
+			panel_statuses[i] = PanelStatus.Normal
+		_update_panel_textures()
 
 
 func _on_player_move(_move_sign: int, _current_panel_id: int):
 	if player.current_panel_id == self.top_panel_id:
 		if Global.state == Global.State.Exiting:
-			self.trigger_in_between_level()
 			Global.state = Global.State.InBetween
 		elif Global.state == Global.State.InBetween:
-			# update all values! start new level puzzle!
 			Global.state = Global.State.InLevel
+
+
+func _on_player_play_card(card_key_id: int):
+	if Global.state == Global.State.InLevel and card_key_id <= 4:
+		# build panel cards (key 1~5)
+		self.build_panel_from_clock_hand(card_key_id)
+
+		print(Global.get_current_level_goal())
+		print(self.is_puzzle_complete(Global.get_current_level_goal()))
+		if self.is_puzzle_complete(Global.get_current_level_goal()):
+			# Global.increment_current_level_puzzle()
+			Global.current_puzzle_idx += 1
+			if Global.current_puzzle_idx < 3:
+				# load next level
+				clock.modify_clock_lights_from_goal(Global.get_current_level_goal())
+			else:
+				# puzzle complete; enter exiting state
+				clock.modify_clock_lights_from_goal("------------") # clear clock lights
+				self._update_panel_status_all_fade_except_opposite()
+				Global.state = Global.State.Exiting
 
 
 func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
@@ -83,15 +115,13 @@ func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
 
 
 func is_puzzle_complete(level_goal: String) -> bool:
-	if not Global.state == Global.State.InLevel:
-		return false
-
 	for i in 12:
 		var goal_status = {
 			"-": PanelStatus.Normal,
 			"h": PanelStatus.Holy,
 			"d": PanelStatus.Dark,
 		}[level_goal[i]]
+		print("%s %s %s" % [i, goal_status, panel_statuses[i]])
 		if goal_status != panel_statuses[i]:
 			return false
 	return true # level complete if InLevel, and all panel status is same as goal status
@@ -100,7 +130,7 @@ func is_puzzle_complete(level_goal: String) -> bool:
 func build_panel_from_clock_hand(card_idx: int) -> void:
 	panel_statuses[clock.clock1_panel_id - 1] = _get_panel_status_from_card_idx(card_idx)
 	panel_statuses[clock.clock2_panel_id - 1] = _get_panel_status_from_card_idx(card_idx)
-	_update_panel_sprite_texture()
+	_update_panel_textures()
 
 
 func build_panel_on_top(card_idx: int) -> void:
@@ -118,45 +148,27 @@ func build_panel_on_top(card_idx: int) -> void:
 	}[card_idx]
 	panel_statuses[to_build_idx] = new_panel_status
 	top_panel_id = to_build_idx + 1
-	_update_panel_sprite_texture()
-	_update_panel_sprite_modulate()
+	_update_panel_textures()
+	_update_panel_lights_dark_to_light()
 
 
-func trigger_enter_level() -> void:
-	Global.state = Global.State.InLevel
-	for i in 12:
-		panel_sprites[i].get_child(0).energy = 1
-		panel_sprites[i].modulate = Color(1, 1, 1, 1)
-		panel_statuses[i] = PanelStatus.Normal
-	_update_panel_sprite_texture()
+func _get_opposite_panel_idx() -> int:
+	var opposite_panel_idx = self.player.current_panel_id + 5 # + 6 (id) - 1 (for idx)
+	if opposite_panel_idx >= 12:
+		opposite_panel_idx -= 12
+	return opposite_panel_idx
 
 
-func trigger_exiting_level(player_panel_id: int) -> void:
-	Global.state = Global.State.Exiting
+func _update_panel_status_all_fade_except_opposite() -> void:
 	for i in 12:
 		panel_statuses[i] = PanelStatus.Fade
 
 	# make the opposite of player's current panel the exit of "Exiting" floor
-	var opposite_panel_idx = player_panel_id + 5 # + 6 (id) - 1 (for idx)
-	if opposite_panel_idx >= 12:
-		opposite_panel_idx -= 12
+	var opposite_panel_idx = self._get_opposite_panel_idx()
 	panel_statuses[opposite_panel_idx] = PanelStatus.Normal
 	panel_sprites[opposite_panel_idx].get_child(0).energy = 3
 	self.top_panel_id = opposite_panel_idx + 1
-	_update_panel_sprite_texture()
-
-
-func trigger_in_between_level() -> void:
-	var empty_panel_idx = self.top_panel_id - 1 + 11
-	empty_panel_idx %= 12
-	self.top_panel_id -= 2
-	if self.top_panel_id < 1:
-		self.top_panel_id += 12
-	self.top_panel_id = self.top_panel_id
-
-	self.panel_statuses[empty_panel_idx] = PanelStatus.Empty
-	self._update_panel_sprite_texture()
-	self._update_panel_sprite_modulate()
+	_update_panel_textures()
 
 
 func trigger_global_freeze() -> void:
@@ -169,7 +181,7 @@ func trigger_global_freeze() -> void:
 	Global.in_freeze = false
 
 
-func _update_panel_sprite_modulate() -> void:
+func _update_panel_lights_dark_to_light() -> void:
 	var to_fill_idx = top_panel_id
 	if to_fill_idx == 12:
 		to_fill_idx = 0
@@ -184,7 +196,7 @@ func _update_panel_sprite_modulate() -> void:
 			to_fill_idx = 0
 
 
-func _update_panel_sprite_texture() -> void:
+func _update_panel_textures() -> void:
 	for i in 12:
 		if i + 1 == top_panel_id:
 			panel_sprites[i].texture = panel_sprite_top_map[panel_statuses[i]]
