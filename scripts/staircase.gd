@@ -10,7 +10,11 @@ var dark_to_light_values: Array[float] = [0.16, 0.27, 0.37, 0.46, 0.55, 0.64, 0.
 	$Panel7/Sprite, $Panel8/Sprite, $Panel9/Sprite, $Panel10/Sprite, $Panel11/Sprite, $Panel12/Sprite,
 ]
 
-enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
+enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty, Fade}
+
+enum StaircaseState {Exiting, InLevel, InBetween}
+
+var state: StaircaseState = StaircaseState.InBetween
 
 @onready var panel_sprite_map := {
 	PanelStatus.Normal: preload('res://art/staircase_tile_normal.png'),
@@ -19,6 +23,7 @@ enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
 	PanelStatus.Gap: preload('res://art/staircase_tile_gap.png'),
 	PanelStatus.Cracked: preload('res://art/staircase_tile_holy.png'),
 	PanelStatus.Empty: preload('res://art/empty_sprite.png'),
+	PanelStatus.Fade: preload('res://art/staircase_tile_empty.png')
 }
 
 @onready var panel_sprite_top_map := {
@@ -37,7 +42,6 @@ var panel_statuses: Array[PanelStatus] = [
 ]
 
 var top_panel_id := 6 # top panel ID (not idx!) <int>1~12
-var is_in_level := false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -55,6 +59,20 @@ func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
 		3: PanelStatus.Dark,
 		4: PanelStatus.Gap,
 	}[card_idx]
+
+
+func is_level_complete(level_goal: String) -> bool:
+	if self.state == StaircaseState.InLevel:
+		for i in 12:
+			var goal_status = {
+				"-": PanelStatus.Normal,
+				"h": PanelStatus.Holy,
+				"d": PanelStatus.Dark,
+			}[level_goal[i]]
+			if goal_status != panel_statuses[i]:
+				return false
+		return true  # level complete if InLevel, and all panel status is same as goal status
+	return false
 
 
 func build_panel_on_clock_hand(clock: Clock, card_idx: int) -> void:
@@ -83,17 +101,25 @@ func build_panel_on_top(card_idx: int) -> void:
 
 
 func trigger_enter_level() -> void:
-	if not is_in_level:
-		# test light
-		# for light_node in self.light_nodes
-		pass
+	self.state = StaircaseState.InLevel
+	for i in 12:
+		panel_sprites[i].get_child(0).energy = 1
+		panel_sprites[i].modulate = Color(1, 1, 1, 1)
+		panel_statuses[i] = PanelStatus.Normal
+	_update_panel_sprite_texture()
 
-		is_in_level = true
-		for i in 12:
-			panel_sprites[i].get_child(0).energy = 1
-			panel_sprites[i].modulate = Color(1, 1, 1, 1)
-			panel_statuses[i] = PanelStatus.Normal
-		_update_panel_sprite_texture()
+
+func trigger_exiting_level(player_panel_id: int) -> void:
+	self.state = StaircaseState.Exiting
+	for i in 12:
+		panel_statuses[i] = PanelStatus.Fade
+
+	# make the opposite of player's current panel the exit of "Exiting" floor
+	var opposite_panel_idx = player_panel_id + 5  # + 6 (id) - 1 (for idx)
+	if opposite_panel_idx >= 12:
+		opposite_panel_idx -= 12
+	panel_statuses[opposite_panel_idx] = PanelStatus.Normal
+	_update_panel_sprite_texture()
 
 
 func _update_panel_sprite_modulate() -> void:

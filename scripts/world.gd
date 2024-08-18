@@ -6,6 +6,7 @@ extends Node2D
 @onready var staircase: Staircase = $Rotator/Staircase
 @onready var label: Label = $Label
 
+enum StaircaseState {Exiting, InLevel, InBetween}  # copy from Staircase
 var is_in_level := false
 var player_level := 1001
 var level_levels: Array[int] = [1002, 1037, 1073] # stage levels
@@ -41,7 +42,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if is_in_level:
+	if staircase.state == StaircaseState.InLevel:
 		rotator.rotation_degrees += rotate_speed * delta
 
 
@@ -50,7 +51,7 @@ func _on_player_mess_up():
 
 
 func _on_player_move(move_sign: int, _current_panel_id: int):
-	if not self.is_in_level:
+	if staircase.state == StaircaseState.InBetween:
 		player_level += move_sign
 
 	if player_level in self.level_levels and self.last_trigger != player_level:
@@ -58,8 +59,6 @@ func _on_player_move(move_sign: int, _current_panel_id: int):
 		staircase.trigger_enter_level()
 		clock.trigger_enter_level(level_goals[current_level_idx])
 		self.last_trigger = player_level
-		self.is_in_level = true
-		self.current_level_idx += 1
 
 	_update_label()
 
@@ -69,6 +68,9 @@ func _on_player_play_card(card_key_id: int):
 		# build panel cards
 		# staircase.build_panel(card_key_id)
 		staircase.build_panel_on_clock_hand(clock, card_key_id)
+		if staircase.is_level_complete(level_goals[current_level_idx]):
+			self.current_level_idx += 1
+			staircase.trigger_exiting_level(player.current_panel_id)
 	else:
 		# ability cards ... (?)
 		pass

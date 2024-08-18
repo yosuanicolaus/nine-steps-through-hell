@@ -3,6 +3,7 @@ extends Node
 
 var bpm: int = 100:
 	set(val):
+		bpm = val
 		beat_wait_time = 60.0 / val
 var beat_wait_time: float = 60.0 / bpm
 var timer := Timer.new()

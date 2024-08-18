@@ -31,8 +31,9 @@ var cards: Array[int] = [
 ]
 
 var current_panel_id := 1  # panel ID; int of range 1 ~ 12
+var is_in_freeze := false
 
-enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty} # mirror of staircase.gd
+enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty, Fade} # mirror of staircase.gd
 
 
 func _ready() -> void:
@@ -61,10 +62,13 @@ func _process(_delta: float) -> void:
 			player_play_card.emit(i)
 
 
-func move_player(move_sign=1, going_up=false):
+func move_player(move_sign=1, going_up=false) -> void:
 	# sign can be 1 or -1. 1 means right, -1 means left
 	# print(press_beat_idx, " ",  release_beat_idx, " ", jump_length)
 	# self.rotation_degrees += 30 * jump_length
+	if self.is_in_freeze:
+		return
+
 	self.rotation_degrees += 30 * move_sign
 
 	if going_up:
@@ -72,9 +76,7 @@ func move_player(move_sign=1, going_up=false):
 
 	self.current_panel_id += move_sign
 	current_panel_id %= 12
-	# print("current_panel_id", current_panel_id)
 	player_move.emit(move_sign, current_panel_id)
-	# check_panel_event()
 
 
 # func check_panel_event():
