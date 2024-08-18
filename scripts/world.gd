@@ -1,16 +1,33 @@
 extends Node2D
 
 @onready var rotator = $Rotator
-@onready var player: Node2D = $Rotator/Player
-@onready var clock = $Rotator/Clock
-@onready var label = $Label
-@onready var staircase = $Rotator/Staircase
+@onready var player: Player = $Rotator/Player
+@onready var clock: Clock = $Rotator/Clock
+@onready var staircase: Staircase = $Rotator/Staircase
+@onready var label: Label = $Label
 
 var is_in_level := false
 var player_level := 1001
 var level_levels: Array[int] = [1002, 1037, 1073] # stage levels
 
 @export var rotate_speed = 0.4
+var last_trigger = -1
+
+var current_level_idx = 0
+var level_goals: Array[String] = [
+	"---h--h-----",
+	"---h--h----h",
+	"---h---d----",
+	"---h--h-----",
+	"---h--h-----",
+	"---h--h-----",
+	"---h--h-----",
+	"---h--h-----",
+	"---h--h-----",
+	"---h--h-----",
+	"---h--h-----",
+	"---h--h-----",
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,18 +53,27 @@ func _on_player_move(move_sign: int, _current_panel_id: int):
 	if not self.is_in_level:
 		player_level += move_sign
 
-	if player_level in self.level_levels:
-		# trigger level
+	if player_level in self.level_levels and self.last_trigger != player_level:
+		# make sure only triggers once
+		staircase.trigger_enter_level()
+		clock.trigger_enter_level(level_goals[current_level_idx])
+		self.last_trigger = player_level
 		self.is_in_level = true
-		staircase.trigger_in_level()
+		self.current_level_idx += 1
 
 	_update_label()
 
 
 func _on_player_play_card(card_key_id: int):
 	if card_key_id <= 4:
-		staircase.build_panel(card_key_id)
-		_update_label()
+		# build panel cards
+		# staircase.build_panel(card_key_id)
+		staircase.build_panel_on_clock_hand(clock, card_key_id)
+	else:
+		# ability cards ... (?)
+		pass
+
+	_update_label()
 
 
 func _on_beat():
@@ -56,8 +82,9 @@ func _on_beat():
 
 func _update_label() -> void:
 	label.text = '\n'.join([
-		"Player info",
-		"level: %s" % str(player_level),
+		"player_level: %s" % str(player_level),
+		"clock1_panel_id: %s" % str(clock.clock1_panel_id),
+		"clock2_panel_id: %s" % str(clock.clock2_panel_id),
 		"Card info",
 		"card 1: %s" % player.cards[0],
 		"card 2: %s" % player.cards[1],

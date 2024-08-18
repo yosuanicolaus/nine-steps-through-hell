@@ -15,6 +15,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel1/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel2" type="Node2D" parent="."]
@@ -26,6 +27,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel2/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel3" type="Node2D" parent="."]
@@ -37,6 +39,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel3/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel4" type="Node2D" parent="."]
@@ -48,6 +51,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel4/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel5" type="Node2D" parent="."]
@@ -59,6 +63,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel5/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel6" type="Node2D" parent="."]
@@ -70,6 +75,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel6/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel7" type="Node2D" parent="."]
@@ -81,6 +87,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel7/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel8" type="Node2D" parent="."]
@@ -92,6 +99,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel8/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel9" type="Node2D" parent="."]
@@ -103,6 +111,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel9/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel10" type="Node2D" parent="."]
@@ -114,6 +123,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel10/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel11" type="Node2D" parent="."]
@@ -125,6 +135,7 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel11/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")
 
 [node name="Panel12" type="Node2D" parent="."]
@@ -136,4 +147,5 @@ texture = ExtResource("1_6eaj8")
 
 [node name="PointLight2D" type="PointLight2D" parent="Panel12/Sprite"]
 scale = Vector2(3.97757, 3.98318)
+energy = 0.57
 texture = ExtResource("3_dtb67")

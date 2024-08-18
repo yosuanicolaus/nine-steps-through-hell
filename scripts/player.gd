@@ -15,12 +15,6 @@ var height := 0
 var double_jump := false
 
 var canon_rotation_degree = 0
-var is_moving := false
-var is_moving_begin := deg_to_rad(0)
-var is_moving_end := deg_to_rad(0)
-var is_moving_elapsed := 0.0
-var is_moving_speed := 7
-var is_moving_treshold := 0.06
 
 var cards: Array[int] = [
 	# build cards

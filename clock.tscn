@@ -1,14 +1,106 @@
-[gd_scene load_steps=6 format=3 uid="uid://n28l7gogwcfj"]
+[gd_scene load_steps=7 format=3 uid="uid://n28l7gogwcfj"]
 
-[ext_resource type="Texture2D" uid="uid://11i2mmpjjc11" path="res://art/clock.png" id="1_k45c0"]
+[ext_resource type="Texture2D" uid="uid://brw4jf61s0p5" path="res://art/Clock_BG.png" id="1_1ld3p"]
 [ext_resource type="Script" path="res://scripts/clock.gd" id="2_dbudg"]
 [ext_resource type="Texture2D" uid="uid://ddfk6o1ons5w4" path="res://art/clock_hand.png" id="2_ix32p"]
 [ext_resource type="Texture2D" uid="uid://dwxu5xlxq55ek" path="res://art/clock_hand_2.png" id="3_bjrs8"]
+[ext_resource type="Texture2D" uid="uid://bsisymjnydefa" path="res://art/Clock_numbers.png" id="4_5kkbh"]
 [ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="4_pibxg"]
 
 [node name="Clock" type="Sprite2D"]
-texture = ExtResource("1_k45c0")
+texture = ExtResource("1_1ld3p")
 script = ExtResource("2_dbudg")
+
+[node name="Light1" type="PointLight2D" parent="."]
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light2" type="PointLight2D" parent="."]
+rotation = 0.523599
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light3" type="PointLight2D" parent="."]
+rotation = 1.0472
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light4" type="PointLight2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light5" type="PointLight2D" parent="."]
+rotation = 2.0944
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light6" type="PointLight2D" parent="."]
+rotation = 2.61799
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light7" type="PointLight2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light8" type="PointLight2D" parent="."]
+rotation = 3.66519
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light9" type="PointLight2D" parent="."]
+rotation = 4.18879
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light10" type="PointLight2D" parent="."]
+rotation = 4.71239
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light11" type="PointLight2D" parent="."]
+rotation = 5.23599
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="Light12" type="PointLight2D" parent="."]
+rotation = 6.28319
+scale = Vector2(0.396341, 0.396341)
+energy = 0.0
+texture = ExtResource("4_pibxg")
+offset = Vector2(0, -668.616)
+
+[node name="ClockNumbers" type="Sprite2D" parent="."]
+texture = ExtResource("4_5kkbh")
+
+[node name="MainLight" type="PointLight2D" parent="."]
+scale = Vector2(4.1198, 4.1198)
+energy = 3.0
+texture = ExtResource("4_pibxg")
 
 [node name="ClockHand2" type="Sprite2D" parent="."]
 rotation = 3.14159
@@ -26,9 +118,4 @@ offset = Vector2(0, -140)
 
 [node name="PointLight2D" type="PointLight2D" parent="ClockHand"]
 position = Vector2(0, -261)
-texture = ExtResource("4_pibxg")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(2.62732, 2.62732)
-energy = 2.0
 texture = ExtResource("4_pibxg")

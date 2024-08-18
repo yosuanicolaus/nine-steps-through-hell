@@ -5,19 +5,9 @@ extends Node2D
 # modulate values for Color(r, g, b) from darkest to lightest
 var dark_to_light_values: Array[float] = [0.16, 0.27, 0.37, 0.46, 0.55, 0.64, 0.73, 0.82, 0.91, 1.0, 1.0, 1.0]
 
-@onready var panel_sprites: Array[Sprite2D] = [
-	$Panel1/Sprite, # player start location
-	$Panel2/Sprite,
-	$Panel3/Sprite,
-	$Panel4/Sprite,
-	$Panel5/Sprite,
-	$Panel6/Sprite,
-	$Panel7/Sprite,
-	$Panel8/Sprite,
-	$Panel9/Sprite,
-	$Panel10/Sprite,
-	$Panel11/Sprite,
-	$Panel12/Sprite,
+@onready var panel_sprites: Array[Sprite2D] = [ # player start at Panel1
+	$Panel1/Sprite, $Panel2/Sprite, $Panel3/Sprite, $Panel4/Sprite, $Panel5/Sprite, $Panel6/Sprite,
+	$Panel7/Sprite, $Panel8/Sprite, $Panel9/Sprite, $Panel10/Sprite, $Panel11/Sprite, $Panel12/Sprite,
 ]
 
 enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
@@ -41,21 +31,13 @@ enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
 }
 
 var panel_statuses: Array[PanelStatus] = [
-	PanelStatus.Normal,
-	PanelStatus.Normal,
-	PanelStatus.Normal,
-	PanelStatus.Normal,
-	PanelStatus.Normal,
-	PanelStatus.Normal,
-	PanelStatus.Empty,
-	PanelStatus.Empty,
-	PanelStatus.Empty,
-	PanelStatus.Empty,
-	PanelStatus.Empty,
-	PanelStatus.Empty,
+	PanelStatus.Normal, PanelStatus.Normal, PanelStatus.Normal, PanelStatus.Normal,
+	PanelStatus.Normal, PanelStatus.Normal, PanelStatus.Empty, PanelStatus.Empty,
+	PanelStatus.Empty, PanelStatus.Empty, PanelStatus.Empty, PanelStatus.Empty,
 ]
 
 var top_panel_id := 6 # top panel ID (not idx!) <int>1~12
+var is_in_level := false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -64,12 +46,24 @@ func _ready() -> void:
 	_update_panel_sprite_modulate()
 
 
-func update_from_player_action(player: Player) -> void:
-	# based on player's current panel, update top_panel
-	print("update_from_player_action ", player)
+func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
+	assert(card_idx >= 0 and card_idx <= 4, "card_idx must be between 0 - 4!")
+	return {
+		0: PanelStatus.Normal,
+		1: PanelStatus.Cracked,
+		2: PanelStatus.Holy,
+		3: PanelStatus.Dark,
+		4: PanelStatus.Gap,
+	}[card_idx]
 
 
-func build_panel(card_idx: int) -> void:
+func build_panel_on_clock_hand(clock: Clock, card_idx: int) -> void:
+	panel_statuses[clock.clock1_panel_id - 1] = _get_panel_status_from_card_idx(card_idx)
+	panel_statuses[clock.clock2_panel_id - 1] = _get_panel_status_from_card_idx(card_idx)
+	_update_panel_sprite_texture()
+
+
+func build_panel_on_top(card_idx: int) -> void:
 	assert(card_idx >= 0 and card_idx <= 4, "card_idx must be between 0 - 4!")
 	var to_build_idx = top_panel_id
 	if to_build_idx == 12:
@@ -88,12 +82,18 @@ func build_panel(card_idx: int) -> void:
 	_update_panel_sprite_modulate()
 
 
-func trigger_in_level() -> void:
-	for i in 12:
-		panel_sprites[i].get_child(0).energy = 1
-		panel_sprites[i].modulate = Color(1, 1, 1, 1)
-		panel_statuses[i] = PanelStatus.Normal
-	_update_panel_sprite_texture()
+func trigger_enter_level() -> void:
+	if not is_in_level:
+		# test light
+		# for light_node in self.light_nodes
+		pass
+
+		is_in_level = true
+		for i in 12:
+			panel_sprites[i].get_child(0).energy = 1
+			panel_sprites[i].modulate = Color(1, 1, 1, 1)
+			panel_statuses[i] = PanelStatus.Normal
+		_update_panel_sprite_texture()
 
 
 func _update_panel_sprite_modulate() -> void:

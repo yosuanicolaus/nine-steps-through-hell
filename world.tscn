@@ -20,7 +20,6 @@ script = ExtResource("1_6xdhs")
 
 [node name="Player" parent="Rotator" instance=ExtResource("3_qku0a")]
 rotation = -0.00211904
-scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -31,7 +30,6 @@ script = ExtResource("4_2apkg")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_870tf")
-autoplay = true
 script = ExtResource("4_2apkg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
