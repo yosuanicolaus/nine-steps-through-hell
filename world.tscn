@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/conductor.gd" id="4_2apkg"]
 [ext_resource type="AudioStream" uid="uid://gm02nsxqv73j" path="res://music/clock_tick_100bpm.wav" id="4_7qvwf"]
 [ext_resource type="PackedScene" uid="uid://b8arvi67b661s" path="res://staircase.tscn" id="6_1ga4c"]
-[ext_resource type="AudioStream" uid="uid://d3ekdji0nkg8o" path="res://music/proto_100.wav" id="7_870tf"]
+[ext_resource type="AudioStream" uid="uid://bku6yxmil2065" path="res://music/Limbo v1.wav" id="7_xdbrr"]
 [ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="9_fpb0h"]
 
 [node name="World" type="Node2D"]
@@ -29,7 +29,8 @@ autoplay = true
 script = ExtResource("4_2apkg")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_870tf")
+stream = ExtResource("7_xdbrr")
+autoplay = true
 script = ExtResource("4_2apkg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

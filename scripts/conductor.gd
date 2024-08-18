@@ -1,11 +1,11 @@
 extends AudioStreamPlayer
 
-signal beat
+signal signal_audio_beat
 
 @export var song_bpm: float = 100.0
 
 # https://www.reddit.com/r/godot/comments/15jqlqh/how_do_i_make_a_metronome_that_activates_triggers/
-# Tracking the beat and song position
+# Tracking the signal_audio_beat and song position
 var song_position: float = 0.0
 var last_reported_beat := 0
 var song_position_in_beats := 0
@@ -28,7 +28,7 @@ func _process(_delta):
 
 func _report_beat() -> void:
 	if last_reported_beat < song_position_in_beats:
-		# print("beat ", song_position_in_beats)
-		# emit_signal("beat", song_position_in_beats)
-		beat.emit(song_position_in_beats)
+		# print("signal_audio_beat ", song_position_in_beats)
+		# emit_signal("signal_audio_beat", song_position_in_beats)
+		signal_audio_beat.emit(song_position_in_beats)
 		last_reported_beat = song_position_in_beats

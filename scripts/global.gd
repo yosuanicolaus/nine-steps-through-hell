@@ -1,6 +1,10 @@
 extends Node
 
 
+signal signal_global_state_change
+
+
+enum State {Exiting, InLevel, InBetween}
 var bpm: int = 100:
 	set(val):
 		bpm = val
@@ -11,10 +15,36 @@ var beat_idx = 1
 
 var in_freeze := false
 
+var state: State = State.InBetween:
+	# make sure state is set at the last line!
+	set(new_state):
+		state = new_state
+		if state == State.Exiting:
+			pass
+		elif state == State.InBetween:
+			current_level_idx += 1
+			current_puzzle_idx = 0
+		else: # state == State.InLevel
+			pass
+		signal_global_state_change.emit()
+
+# var player_level := 1001
+var current_level_idx = 0   # 0~8
+var current_puzzle_idx = 0  # 0~2
+var level_goals = [  # demon starts at level 1, puzzle 2 (0_1)
+	["---h--------", "--h----h----", "-----d------"],
+	["---h--h----h", "---h--d-----", "---h--h--d--"],
+	["---h---d----", "---h--h-----", "---h--h-----"],
+	["---h--h-----", "---h--h-----", "---h--h-----"],
+	["---h--h-----", "---h--h-----", "---h--h-----"],
+	["---h--h-----", "---h--h-----", "---h--h-----"],
+	["---h--h-----", "---h--h-----", "---h--h-----"],
+	["---h--h-----", "---h--h-----", "---h--h-----"],
+	["---h--h-----", "---h--h-----", "---h--h-----"],
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("global _ready")
 	add_child(timer)
 	timer.wait_time = beat_wait_time
 	timer.timeout.connect(_make_beat)
@@ -36,6 +66,10 @@ func get_current_beat(action_time: float) -> int:
 		return beat_idx - 1
 
 	return -1
+
+
+func get_current_level_goal() -> String:
+	return self.level_goals[self.current_level_idx][self.current_puzzle_idx]
 
 
 func _make_beat():
