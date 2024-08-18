@@ -3,7 +3,7 @@ extends Node2D
 
 
 # modulate values for Color(r, g, b) from darkest to lightest
-var modulate_values: Array[float] = [0.16, 0.27, 0.37, 0.46, 0.55, 0.64, 0.73, 0.82, 0.91, 1.0, 1.0, 1.0]
+var dark_to_light_values: Array[float] = [0.16, 0.27, 0.37, 0.46, 0.55, 0.64, 0.73, 0.82, 0.91, 1.0, 1.0, 1.0]
 
 @onready var panel_sprites: Array[Sprite2D] = [
 	$Panel1/Sprite, # player start location
@@ -88,13 +88,21 @@ func build_panel(card_idx: int) -> void:
 	_update_panel_sprite_modulate()
 
 
+func trigger_in_level() -> void:
+	for i in 12:
+		panel_sprites[i].get_child(0).energy = 1
+		panel_sprites[i].modulate = Color(1, 1, 1, 1)
+		panel_statuses[i] = PanelStatus.Normal
+	_update_panel_sprite_texture()
+
+
 func _update_panel_sprite_modulate() -> void:
 	var to_fill_idx = top_panel_id
 	if to_fill_idx == 12:
 		to_fill_idx = 0
 
 	for dark_idx in 12:
-		var mod_val := modulate_values[dark_idx]
+		var mod_val := dark_to_light_values[dark_idx]
 		panel_sprites[to_fill_idx].get_child(0).energy = mod_val
 		panel_sprites[to_fill_idx].modulate = Color(mod_val, mod_val, mod_val, 1)
 		# panel_sprites[to_fill_idx].apply_scale

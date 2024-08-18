@@ -12,14 +12,17 @@
 [node name="World" type="Node2D"]
 script = ExtResource("1_6xdhs")
 
-[node name="Clock" parent="." instance=ExtResource("2_6etqk")]
+[node name="Rotator" type="Node2D" parent="."]
 
-[node name="Staircase" parent="." instance=ExtResource("6_1ga4c")]
+[node name="Clock" parent="Rotator" instance=ExtResource("2_6etqk")]
+
+[node name="Staircase" parent="Rotator" instance=ExtResource("6_1ga4c")]
+
+[node name="Player" parent="Rotator" instance=ExtResource("3_qku0a")]
+rotation = -0.00211904
+scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("3_qku0a")]
-rotation = -0.00211904
 
 [node name="Metronome" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7qvwf")

@@ -1,7 +1,7 @@
 class_name Player
 extends Node2D
 
-# signal player_move  # param: <int> current_panel_id
+signal player_move  # param: <int> move_sign, <int> current_panel_id
 signal player_mess_up
 signal player_play_card  # param: <int> card_idx (0 ~ 7)
 
@@ -45,15 +45,8 @@ func _ready() -> void:
 	print("player instanced")
 
 
-func _process(delta: float) -> void:
-	if self.is_moving:
-		self.rotation = lerp_angle(self.is_moving_begin, self.is_moving_end, self.is_moving_elapsed)
-		self.is_moving_elapsed += delta * self.is_moving_speed
-		if abs(self.rotation - self.is_moving_end) <= self.is_moving_treshold:
-			self.is_moving = false
-
-	# elif because when moving, player shouldn't move somewhere else
-	elif Input.is_action_just_pressed('ui_left') or Input.is_action_just_pressed('ui_right'):
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed('ui_left') or Input.is_action_just_pressed('ui_right'):
 		press_beat_idx = Global.get_current_beat(action_time)
 		if press_beat_idx == -2:
 			double_jump = true
@@ -78,24 +71,20 @@ func move_player(move_sign=1, going_up=false):
 	# sign can be 1 or -1. 1 means right, -1 means left
 	# print(press_beat_idx, " ",  release_beat_idx, " ", jump_length)
 	# self.rotation_degrees += 30 * jump_length
-	self.canon_rotation_degree += 30 * move_sign
-	self.is_moving = true
-	self.is_moving_begin = self.rotation
-	self.is_moving_end = deg_to_rad(canon_rotation_degree)
-	self.is_moving_elapsed = 0
+	self.rotation_degrees += 30 * move_sign
 
 	if going_up:
 		self.height += 1
 
-	# self.current_panel_id += move_sign
-	# current_panel_id %= 12
+	self.current_panel_id += move_sign
+	current_panel_id %= 12
 	# print("current_panel_id", current_panel_id)
-	# player_move.emit(current_panel_id)
+	player_move.emit(move_sign, current_panel_id)
 	# check_panel_event()
 
 
-func check_panel_event():
-	var current_panel_idx = current_panel_id - 1
+# func check_panel_event():
+	# var current_panel_idx = current_panel_id - 1
 	# var current_panel_status = staircase.panel_statuses[current_panel_idx]
 	# print("current panel; idx: ", current_panel_idx, ", status: ", current_panel_status)
 	# if current_panel_status == PanelStatus.Normal:
