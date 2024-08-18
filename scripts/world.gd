@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 		rotator.rotation_degrees += rotate_speed * delta
 
 
-func _on_player_move(_move_sign: int, _current_panel_id: int):
+func _on_player_move(_move_sign: int, _current_panel_idx: int):
 	_update_label()
 
 
@@ -43,6 +43,8 @@ func _update_label() -> void:
 		"current_level_idx: %s" % str(Global.current_level_idx),
 		"current_puzzle_idx: %s" % str(Global.current_puzzle_idx),
 		"In Freeze: %s" % str(Global.in_freeze),
-		"clock1_panel_id: %s" % str(clock.clock1_panel_id),
-		"clock2_panel_id: %s" % str(clock.clock2_panel_id),
+		"clock1_panel_idx: %s" % str(clock.clock1_panel_idx),
+		"clock2_panel_idx: %s" % str(clock.clock2_panel_idx),
+		"player current panel idx: %s" % str(player.current_panel_idx),
+		"stair top panel idx: %s" % str(staircase.top_panel_idx),
 	])

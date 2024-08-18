@@ -46,7 +46,7 @@ text = "Cards info
 "
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-859, -390)
-scale = Vector2(1.15808, 4.34132)
+position = Vector2(-821, -304)
+scale = Vector2(1.93638, 3.78346)
 energy = 2.6
 texture = ExtResource("9_fpb0h")

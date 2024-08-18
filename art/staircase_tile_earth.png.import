@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr2ja6u0e4mt3"
-path="res://.godot/imported/staircase_tile_cracked_top.png-6f292265ac577681891553c2ca25aaa1.ctex"
+uid="uid://cd6fw0m5bqwlb"
+path="res://.godot/imported/staircase_tile_earth.png-56d1d8dfc09b61f90f22f15b41858e35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/staircase_tile_cracked_top.png"
-dest_files=["res://.godot/imported/staircase_tile_cracked_top.png-6f292265ac577681891553c2ca25aaa1.ctex"]
+source_file="res://art/staircase_tile_earth.png"
+dest_files=["res://.godot/imported/staircase_tile_earth.png-56d1d8dfc09b61f90f22f15b41858e35.ctex"]
 
 [params]
 

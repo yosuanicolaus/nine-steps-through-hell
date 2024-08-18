@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5wwgrm4rtlnk"
-path="res://.godot/imported/staircase_tile_gap_top.png-d468ce17b048b86978a4221b64e9c828.ctex"
+uid="uid://dojvdsgm3f2sv"
+path="res://.godot/imported/animation_demon.png-aa447cd093ce41d2426bc16a0ea7bd7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/staircase_tile_gap_top.png"
-dest_files=["res://.godot/imported/staircase_tile_gap_top.png-d468ce17b048b86978a4221b64e9c828.ctex"]
+source_file="res://art/animation_demon.png"
+dest_files=["res://.godot/imported/animation_demon.png-aa447cd093ce41d2426bc16a0ea7bd7c.ctex"]
 
 [params]
 
