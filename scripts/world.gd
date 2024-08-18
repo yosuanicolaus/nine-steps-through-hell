@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var rotator = $Rotator
 @onready var player: Player = $Rotator/Player
+@onready var demon: Demon = $Rotator/Demon
 @onready var clock: Clock = $Rotator/Clock
 @onready var staircase: Staircase = $Rotator/Staircase
 @onready var label: Label = $Label
@@ -46,5 +47,8 @@ func _update_label() -> void:
 		"clock1_panel_idx: %s" % str(clock.clock1_panel_idx),
 		"clock2_panel_idx: %s" % str(clock.clock2_panel_idx),
 		"player current panel idx: %s" % str(player.current_panel_idx),
+		"player rotation deg: %s" % str(player.rotation_degrees),
+		"demon current panel idx: %s" % str(demon.current_panel_idx),
+		"demon rotation deg: %s" % str(demon.rotation_degrees),
 		"stair top panel idx: %s" % str(staircase.top_panel_idx),
 	])

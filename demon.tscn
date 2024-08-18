@@ -66,6 +66,7 @@ animations = [{
 }]
 
 [node name="Demon" type="Node2D"]
+visible = false
 script = ExtResource("1_8adef")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -73,3 +74,7 @@ position = Vector2(0, -440)
 scale = Vector2(0.812958, 0.812958)
 sprite_frames = SubResource("SpriteFrames_uc7qx")
 animation = &"idle"
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

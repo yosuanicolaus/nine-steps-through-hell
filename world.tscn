@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4ol8oy37obhy"]
+[gd_scene load_steps=10 format=3 uid="uid://b4ol8oy37obhy"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_6xdhs"]
 [ext_resource type="PackedScene" uid="uid://n28l7gogwcfj" path="res://clock.tscn" id="2_6etqk"]
 [ext_resource type="PackedScene" uid="uid://bfap0vi8mughm" path="res://player.tscn" id="3_qku0a"]
 [ext_resource type="Script" path="res://scripts/conductor.gd" id="4_2apkg"]
 [ext_resource type="AudioStream" uid="uid://gm02nsxqv73j" path="res://music/clock_tick_100bpm.wav" id="4_7qvwf"]
+[ext_resource type="PackedScene" uid="uid://bdrtn0cm3n100" path="res://demon.tscn" id="5_ukkis"]
 [ext_resource type="PackedScene" uid="uid://b8arvi67b661s" path="res://staircase.tscn" id="6_1ga4c"]
 [ext_resource type="AudioStream" uid="uid://bku6yxmil2065" path="res://music/Limbo v1.wav" id="7_xdbrr"]
 [ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="9_fpb0h"]
@@ -20,6 +21,9 @@ script = ExtResource("1_6xdhs")
 
 [node name="Player" parent="Rotator" instance=ExtResource("3_qku0a")]
 rotation = -0.00211904
+
+[node name="Demon" parent="Rotator" instance=ExtResource("5_ukkis")]
+rotation = 3.14159
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

@@ -5,7 +5,7 @@ signal signal_player_move  # param: <int> move_sign, <int> current_panel_idx
 signal signal_player_control
 signal signal_player_play_card  # param: <int> card_idx (0 ~ 7)
 
-var action_time := 0.145
+var action_time := 0.17
 var press_beat_idx := -1
 var release_beat_idx := -1
 var last_move_beat_idx := -1
@@ -24,7 +24,7 @@ var height := 0
 # key_w - "panel cleanse" - convert currently stepped panel to a holy panel
 # key_e - "halt" - freeze demon chaser for 3 beats
 
-var current_panel_idx := 0  # panel ID; int of range 1 ~ 12
+var current_panel_idx := 0  # panel IDX; int of range 0-11
 var is_in_freeze := false
 
 enum PanelStatus {Normal, Holy, Dark, Earth, Empty, Fade} # mirror of staircase.gd
@@ -43,10 +43,10 @@ func _on_animation_finish():
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ui_left') or Input.is_action_just_pressed('ui_right'):
 		press_beat_idx = Global.get_current_beat(action_time)
-		# TODO DEBUG MODE: RESTORE LATER
-		if true:
-		# if press_beat_idx != -1 and last_move_beat_idx != press_beat_idx:
-		# 	last_move_beat_idx = press_beat_idx
+		# FOR DEBUG MODE
+		# if true:
+		if press_beat_idx != -1 and last_move_beat_idx != press_beat_idx:
+			last_move_beat_idx = press_beat_idx
 
 			var move_sign = 1 if Input.is_action_just_pressed('ui_right') else -1
 			move_player(move_sign)
