@@ -32,6 +32,9 @@ func get_current_beat(action_time: float) -> int:
 		return beat_idx
 	elif beat_wait_time - timer.time_left <= action_time:
 		return beat_idx - 1
+
+	# check if it's in the middle (-2) ? should we?
+
 	return -1
 
 

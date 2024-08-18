@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://scripts/conductor.gd" id="4_2apkg"]
 [ext_resource type="AudioStream" uid="uid://gm02nsxqv73j" path="res://music/clock_tick_100bpm.wav" id="4_7qvwf"]
 [ext_resource type="PackedScene" uid="uid://b8arvi67b661s" path="res://staircase.tscn" id="6_1ga4c"]
-[ext_resource type="PackedScene" uid="uid://bdrtn0cm3n100" path="res://demon.tscn" id="7_2jnbb"]
 [ext_resource type="AudioStream" uid="uid://d3ekdji0nkg8o" path="res://music/proto_100.wav" id="7_870tf"]
+[ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="9_fpb0h"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6xdhs")
@@ -31,6 +31,10 @@ stream = ExtResource("7_870tf")
 autoplay = true
 script = ExtResource("4_2apkg")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+scale = Vector2(0.913684, 1)
+color = Color(0, 0, 0, 1)
+
 [node name="Label" type="Label" parent="."]
 offset_left = -911.0
 offset_top = -511.0
@@ -39,5 +43,8 @@ offset_bottom = -488.0
 text = "Cards info
 "
 
-[node name="Demon" parent="." instance=ExtResource("7_2jnbb")]
-rotation = 3.14159
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-859, -390)
+scale = Vector2(1.15808, 4.34132)
+energy = 2.6
+texture = ExtResource("9_fpb0h")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8arvi67b661s"]
+[gd_scene load_steps=4 format=3 uid="uid://b8arvi67b661s"]
 
 [ext_resource type="Texture2D" uid="uid://q3q1ffxndtjv" path="res://art/staircase_tile_normal.png" id="1_6eaj8"]
 [ext_resource type="Script" path="res://scripts/staircase.gd" id="1_o5o1c"]
+[ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="3_dtb67"]
 
 [node name="Staircase" type="Node2D"]
 script = ExtResource("1_o5o1c")
@@ -12,12 +13,20 @@ script = ExtResource("1_o5o1c")
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
+[node name="PointLight2D" type="PointLight2D" parent="Panel1/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
+
 [node name="Panel2" type="Node2D" parent="."]
 rotation = 0.523599
 
 [node name="Sprite" type="Sprite2D" parent="Panel2"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
+
+[node name="PointLight2D" type="PointLight2D" parent="Panel2/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
 
 [node name="Panel3" type="Node2D" parent="."]
 rotation = 1.0472
@@ -26,12 +35,20 @@ rotation = 1.0472
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
+[node name="PointLight2D" type="PointLight2D" parent="Panel3/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
+
 [node name="Panel4" type="Node2D" parent="."]
 rotation = 1.5708
 
 [node name="Sprite" type="Sprite2D" parent="Panel4"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
+
+[node name="PointLight2D" type="PointLight2D" parent="Panel4/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
 
 [node name="Panel5" type="Node2D" parent="."]
 rotation = 2.0944
@@ -40,12 +57,20 @@ rotation = 2.0944
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
+[node name="PointLight2D" type="PointLight2D" parent="Panel5/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
+
 [node name="Panel6" type="Node2D" parent="."]
 rotation = 2.61799
 
 [node name="Sprite" type="Sprite2D" parent="Panel6"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
+
+[node name="PointLight2D" type="PointLight2D" parent="Panel6/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
 
 [node name="Panel7" type="Node2D" parent="."]
 rotation = 3.14159
@@ -54,12 +79,20 @@ rotation = 3.14159
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
+[node name="PointLight2D" type="PointLight2D" parent="Panel7/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
+
 [node name="Panel8" type="Node2D" parent="."]
 rotation = 3.66519
 
 [node name="Sprite" type="Sprite2D" parent="Panel8"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
+
+[node name="PointLight2D" type="PointLight2D" parent="Panel8/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
 
 [node name="Panel9" type="Node2D" parent="."]
 rotation = 4.18879
@@ -68,12 +101,20 @@ rotation = 4.18879
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
+[node name="PointLight2D" type="PointLight2D" parent="Panel9/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
+
 [node name="Panel10" type="Node2D" parent="."]
 rotation = 4.71239
 
 [node name="Sprite" type="Sprite2D" parent="Panel10"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
+
+[node name="PointLight2D" type="PointLight2D" parent="Panel10/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
 
 [node name="Panel11" type="Node2D" parent="."]
 rotation = 5.23599
@@ -82,9 +123,17 @@ rotation = 5.23599
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
 
+[node name="PointLight2D" type="PointLight2D" parent="Panel11/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")
+
 [node name="Panel12" type="Node2D" parent="."]
 rotation = 5.75959
 
 [node name="Sprite" type="Sprite2D" parent="Panel12"]
 position = Vector2(0, -416)
 texture = ExtResource("1_6eaj8")
+
+[node name="PointLight2D" type="PointLight2D" parent="Panel12/Sprite"]
+scale = Vector2(3.97757, 3.98318)
+texture = ExtResource("3_dtb67")

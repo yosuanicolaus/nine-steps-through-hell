@@ -28,7 +28,7 @@ enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
 	PanelStatus.Dark: preload('res://art/staircase_tile_dark.png'),
 	PanelStatus.Gap: preload('res://art/staircase_tile_gap.png'),
 	PanelStatus.Cracked: preload('res://art/staircase_tile_holy.png'),
-	PanelStatus.Empty: preload('res://art/staircase_tile_empty.png'),
+	PanelStatus.Empty: preload('res://art/empty_sprite.png'),
 }
 
 @onready var panel_sprite_top_map := {
@@ -37,7 +37,7 @@ enum PanelStatus {Normal, Holy, Dark, Gap, Cracked, Empty}
 	PanelStatus.Dark: preload('res://art/staircase_tile_dark_top.png'),
 	PanelStatus.Gap: preload('res://art/staircase_tile_gap_top.png'),
 	PanelStatus.Cracked: preload('res://art/staircase_tile_holy_top.png'),
-	PanelStatus.Empty: preload('res://art/staircase_tile_empty.png'),
+	PanelStatus.Empty: preload('res://art/empty_sprite.png'),
 }
 
 var panel_statuses: Array[PanelStatus] = [
@@ -95,7 +95,9 @@ func _update_panel_sprite_modulate() -> void:
 
 	for dark_idx in 12:
 		var mod_val := modulate_values[dark_idx]
+		panel_sprites[to_fill_idx].get_child(0).energy = mod_val
 		panel_sprites[to_fill_idx].modulate = Color(mod_val, mod_val, mod_val, 1)
+		# panel_sprites[to_fill_idx].apply_scale
 		to_fill_idx += 1
 		if to_fill_idx == 12:
 			to_fill_idx = 0

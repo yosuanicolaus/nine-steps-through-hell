@@ -9,7 +9,7 @@ extends Node2D
 func _ready() -> void:
 	print("world instanced")
 	player.player_mess_up.connect(_on_player_mess_up)
-	player.player_move.connect(_on_player_move)
+	# player.player_move.connect(_on_player_move)
 	player.player_play_card.connect(_on_player_play_card)
 	Global.timer.timeout.connect(_on_beat)
 	_update_label()
@@ -28,9 +28,10 @@ func _on_player_move():
 	pass
 
 
-func _on_player_play_card(card_idx: int):
-	staircase.build_panel(card_idx)
-	_update_label()
+func _on_player_play_card(card_key_id: int):
+	if card_key_id <= 4:
+		staircase.build_panel(card_key_id)
+		_update_label()
 
 
 func _on_beat():

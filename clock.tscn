@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://n28l7gogwcfj"]
+[gd_scene load_steps=5 format=3 uid="uid://n28l7gogwcfj"]
 
 [ext_resource type="Texture2D" uid="uid://11i2mmpjjc11" path="res://art/clock.png" id="1_k45c0"]
 [ext_resource type="Script" path="res://scripts/clock.gd" id="2_dbudg"]
 [ext_resource type="Texture2D" uid="uid://ddfk6o1ons5w4" path="res://art/clock_hand.png" id="2_ix32p"]
+[ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="4_pibxg"]
 
 [node name="Clock" type="Sprite2D"]
 texture = ExtResource("1_k45c0")
@@ -11,3 +12,12 @@ script = ExtResource("2_dbudg")
 [node name="ClockHand" type="Sprite2D" parent="."]
 texture = ExtResource("2_ix32p")
 offset = Vector2(0, -140)
+
+[node name="PointLight2D" type="PointLight2D" parent="ClockHand"]
+position = Vector2(0, -261)
+texture = ExtResource("4_pibxg")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(2.62732, 2.62732)
+energy = 2.0
+texture = ExtResource("4_pibxg")
