@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="3_dtb67"]
 
 [node name="Staircase" type="Node2D"]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_o5o1c")
 
 [node name="Panel1" type="Node2D" parent="."]

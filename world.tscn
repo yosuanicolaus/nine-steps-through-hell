@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4ol8oy37obhy"]
+[gd_scene load_steps=12 format=3 uid="uid://b4ol8oy37obhy"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_6xdhs"]
+[ext_resource type="Texture2D" uid="uid://cghsjky8yte8a" path="res://art/BG_1_Limbo.png" id="2_1in65"]
 [ext_resource type="PackedScene" uid="uid://n28l7gogwcfj" path="res://clock.tscn" id="2_6etqk"]
 [ext_resource type="PackedScene" uid="uid://bfap0vi8mughm" path="res://player.tscn" id="3_qku0a"]
 [ext_resource type="Script" path="res://scripts/conductor.gd" id="4_2apkg"]
@@ -10,8 +11,17 @@
 [ext_resource type="AudioStream" uid="uid://bku6yxmil2065" path="res://music/Limbo v1.wav" id="7_xdbrr"]
 [ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="9_fpb0h"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yfuya"]
+blend_mode = 1
+light_mode = 1
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_6xdhs")
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_yfuya")
+scale = Vector2(1.37781, 1.37781)
+texture = ExtResource("2_1in65")
 
 [node name="Rotator" type="Node2D" parent="."]
 

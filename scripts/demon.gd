@@ -69,7 +69,7 @@ func _get_move_sign() -> int:
 
 func _on_global_beat():
 	# move demon
-	if not demon_active or Global.state != Global.State.InLevel:
+	if not demon_active or Global.in_freeze or Global.state != Global.State.InLevel:
 		return
 
 	if self.cycle[cycle_idx]:

@@ -70,8 +70,8 @@ visible = false
 script = ExtResource("1_8adef")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -440)
-scale = Vector2(0.812958, 0.812958)
+position = Vector2(0, -360)
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_uc7qx")
 animation = &"idle"
 

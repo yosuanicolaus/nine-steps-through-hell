@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="4_pibxg"]
 
 [node name="Clock" type="Sprite2D"]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_1ld3p")
 script = ExtResource("2_dbudg")
 
