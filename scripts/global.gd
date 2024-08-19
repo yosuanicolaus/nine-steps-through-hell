@@ -14,8 +14,9 @@ var timer := Timer.new()
 var beat_idx = 1
 
 var in_freeze := false
+var change_idx = 0
 
-enum State {Exiting, InLevel, InBetween, Tutorial}
+enum State {Exiting, InLevel, InBetween, Tutorial, Change}
 var state: State = State.InBetween:
 	# make sure state is set at the last line!
 	set(new_state):
@@ -27,41 +28,78 @@ var state: State = State.InBetween:
 		elif state == State.Tutorial:
 			self.in_freeze = true
 			pass
+		elif state == State.Change:
+			# TODO change music here!
+			if change_idx == 0:
+				pass
+			elif change_idx == 1:
+				pass
+
+			change_idx += 1
+			state = State.InBetween
+
 		else: # state == State.InLevel
 			pass
 		signal_global_state_change.emit()
 
 # var player_level := 1001
-var current_level_idx = 0   # 0~8
-var current_puzzle_idx = 0  # 0~2
+var current_level_idx = 0 # 0~8
+var current_puzzle_idx = 0 # 0~2
 var level_goals = [
 	["---h--------", "-------h----", "-----h-----h"],
 	["---h------h-", "-h----h-----", "h---h----h--"],
 	["---d--------", "d------d----", "h-----d-----"], # tutor dark panel
-	["d-d---h-h---", "dh--dh--dh--", "dhdhdhdhdhdh"],
-	["------------", "------------", "------------"],
-	["------------", "------------", "------------"],
-	["------------", "------------", "------------"],
-	["------------", "------------", "------------"],
-	["------------", "------------", "------------"],
+	["d-----h-h---", "-dh------d--", "h--d--h--d--"], # 120 bpm
+	["--h----h----", "----d----h--", "-d----h---d-"], # second clock hand
+	["-d-d------d-", "h-h------h--", "d--h--d--h--"],
+	["--e-----e---", "h---d---e---", "--e---e---e-"], # earth panel, 140 bpm
+	["-dddd--hhhh-", "e----ee----e", "dhdhdhdhdhdh"],
+	["d-hd-ed-hdde", "h-hd-d-ee-ed", "edhedhedhedh"],
 ]
 
 var scenarios: Array[State] = [
-	State.Tutorial,
+	State.Tutorial, # move
 	State.InBetween,
-	State.Tutorial,
-	State.Tutorial,
+	State.InBetween,
+	State.Tutorial, # space
+	State.InBetween,
+	State.Tutorial, # place holy and normal
+	State.Tutorial, # first level unfolds
+	State.InLevel, # 1
 	State.Exiting,
 	State.InBetween,
-	State.Tutorial,
-	State.InLevel, # level 1, ... and so on
+	State.InLevel, # 2
 	State.Exiting,
-	State.Tutorial,
 	State.InBetween,
-	State.InLevel,
+	State.Tutorial, # dark panel
+	State.InLevel, # 3
 	State.Exiting,
-	State.Tutorial,
+	State.Change, # music change here
 	State.InBetween,
+	State.Tutorial, # demon chaser
+	State.InLevel, # 4
+	State.Exiting,
+	State.InBetween,
+	State.Tutorial, # clockhand2
+	State.InLevel, # 5
+	State.Exiting,
+	State.InBetween,
+	State.InLevel, # 6
+	State.Exiting,
+	State.Change, # last music change
+	State.InBetween,
+	State.Tutorial, # earth panel
+	State.Exiting,
+	State.InBetween,
+	State.InLevel, # 7
+	State.Exiting,
+	State.InBetween,
+	State.InLevel, # 8
+	State.Exiting,
+	State.InBetween,
+	State.InLevel, # 9
+	State.Exiting,
+	State.Change, # last change: fade to white END
 ]
 var scenario_idx := 0
 var tutorial_idx := 0

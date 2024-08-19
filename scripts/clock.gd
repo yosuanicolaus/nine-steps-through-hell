@@ -35,6 +35,7 @@ var light_energy := 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	clock2_hand.visible = false
 	player.signal_player_control.connect(_on_player_half_beat)
 	player.signal_player_move.connect(_on_player_move)
 	player.signal_player_play_card.connect(_on_player_play_card)
@@ -110,6 +111,7 @@ func _set_clock_lights_off() -> void:
 
 
 func _on_global_beat() -> void:
+	if Global.in_freeze: return
 	if next_rotate_backward:
 		next_rotate_backward = false
 		clock1_hand.rotation_degrees -= 30

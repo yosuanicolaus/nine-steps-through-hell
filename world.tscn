@@ -99,5 +99,5 @@ offset_bottom = -594.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_64ege")
-text = "press space to continue
+text = "press enter to continue
 "

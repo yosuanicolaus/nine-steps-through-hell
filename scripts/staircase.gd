@@ -29,12 +29,7 @@ var panel_statuses: Array[PanelStatus] = [
 	PanelStatus.Fade, PanelStatus.Fade, PanelStatus.Normal, PanelStatus.Empty,
 ]
 
-var top_panel_idx := 10: # top panel ID->IDX <int>0~11
-	set(val):
-		top_panel_idx = val
-		if Global.state != Global.State.InLevel:
-			# highlight top panel
-			self.panel_sprites[val].get_child(0).energy = 3
+var top_panel_idx := 10 # top panel ID->IDX <int>0~11
 var in_between_idx = 0
 var default_energy = 0.57
 
@@ -52,20 +47,21 @@ func _on_global_state_change() -> void:
 	if Global.state == Global.State.Exiting:
 		self._update_panel_status_all_fade_except_opposite()
 	elif Global.state == Global.State.InBetween:
-		# var empty_panel_idx = self.top_panel_idx + 11
+		for i in 12:
+			self.update_panel(i, PanelStatus.Normal)  # clear empty panels
+
 		var empty_panel_idx = player.current_panel_idx + 11
 		empty_panel_idx %= 12
 		self.top_panel_idx = player.current_panel_idx - 2
 		if self.top_panel_idx < 0:
 			self.top_panel_idx += 12
+		self.update_panel(top_panel_idx, PanelStatus.Normal, 3)
 
 		self.update_panel(empty_panel_idx, PanelStatus.Empty)
 	elif Global.state == Global.State.Tutorial:
 		pass
 	else: # InLevel
 		for i in 12:
-			panel_sprites[i].get_child(0).energy = default_energy
-			panel_sprites[i].modulate = Color(1, 1, 1, 1)
 			self.update_panel(i, PanelStatus.Normal)
 
 
@@ -75,15 +71,12 @@ func _on_player_move(_move_sign: int, _current_panel_idx: int):
 
 func _on_player_play_card(card_key_idx: int):
 	if Global.state == Global.State.InLevel:
-		# build panel cards (key 1~5)
+		# build panel cards (key 1~4)
 		# FOR DEBUG
 		# self.debug_build(card_key_idx)
 		self.build_panel_from_clock_hand(card_key_idx)
 		if self.is_puzzle_complete(Global.get_current_level_goal()):
 			Global.increment_current_level_puzzle()
-
-	if Global.state != Global.State.InLevel:
-		self.build_panel_from_clock_hand(card_key_idx)
 
 
 func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
@@ -96,9 +89,10 @@ func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
 	}[card_idx]
 
 
-func update_panel(panel_idx: int, panel_status: PanelStatus) -> void:
+func update_panel(panel_idx: int, panel_status: PanelStatus, energy=self.default_energy) -> void:
 	self.panel_statuses[panel_idx] = panel_status
 	self.panel_sprites[panel_idx].texture = self.panel_sprite_map[panel_status]
+	self.panel_sprites[panel_idx].get_child(0).energy = energy
 	# if panel_status == PanelStatus.Fade:
 	 	# panel_sprites[panel_idx].get_child(0).energy = 0.5
 	# else:
@@ -111,6 +105,7 @@ func is_puzzle_complete(level_goal: String) -> bool:
 			"-": PanelStatus.Normal,
 			"h": PanelStatus.Holy,
 			"d": PanelStatus.Dark,
+			"e": PanelStatus.Earth,
 		}[level_goal[i]]
 		# print("%s %s %s" % [i, goal_status, panel_statuses[i]])
 		if goal_status != panel_statuses[i]:
@@ -120,7 +115,8 @@ func is_puzzle_complete(level_goal: String) -> bool:
 
 func build_panel_from_clock_hand(card_idx: int) -> void:
 	panel_statuses[clock.clock1_panel_idx] = _get_panel_status_from_card_idx(card_idx)
-	panel_statuses[clock.clock2_panel_idx] = _get_panel_status_from_card_idx(card_idx)
+	if Global.unlock_clock_hand2:
+		panel_statuses[clock.clock2_panel_idx] = _get_panel_status_from_card_idx(card_idx)
 	_update_panel_textures()
 
 

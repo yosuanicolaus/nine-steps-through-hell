@@ -52,17 +52,17 @@ func _process(_delta: float) -> void:
 			move_player(move_sign)
 			success_streak += 1
 
-	if Input.is_action_just_pressed('press_space'):  # hold space to control the long clock hand
+	if Input.is_action_pressed('press_space'):  # hold space to control the long clock hand
 		signal_player_control.emit()
 
-	if Input.is_action_pressed('card_1'):
+	if Input.is_action_just_pressed('card_1'):
 		signal_player_play_card.emit(0)
-	if Input.is_action_pressed('card_2'):
+	if Input.is_action_just_pressed('card_2'):
 		signal_player_play_card.emit(1)
 
-	if Global.unlock_panel_dark and Input.is_action_pressed('card_3'):
+	if Global.unlock_panel_dark and Input.is_action_just_pressed('card_3'):
 		signal_player_play_card.emit(2)
-	if Global.unlock_panel_earth and Input.is_action_pressed('card_4'):
+	if Global.unlock_panel_earth and Input.is_action_just_pressed('card_4'):
 		signal_player_play_card.emit(3)
 
 
