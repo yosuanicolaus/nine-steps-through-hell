@@ -40,7 +40,7 @@ func _on_respawn_timer_timeout():
 
 
 func _on_global_state_change():
-	if Global.state == Global.State.InLevel:
+	if Global.state == Global.State.InLevel and Global.unlock_demon:
 		self.respawn_timer.stop()
 		self.demon_active = true
 	else:

@@ -29,8 +29,14 @@ var panel_statuses: Array[PanelStatus] = [
 	PanelStatus.Fade, PanelStatus.Fade, PanelStatus.Normal, PanelStatus.Empty,
 ]
 
-var top_panel_idx := 10 # top panel ID->IDX <int>0~11
+var top_panel_idx := 10: # top panel ID->IDX <int>0~11
+	set(val):
+		top_panel_idx = val
+		if Global.state != Global.State.InLevel:
+			# highlight top panel
+			self.panel_sprites[val].get_child(0).energy = 3
 var in_between_idx = 0
+var default_energy = 0.57
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,29 +44,29 @@ func _ready() -> void:
 	Global.signal_global_state_change.connect(_on_global_state_change)
 	player.signal_player_move.connect(_on_player_move)
 	player.signal_player_play_card.connect(_on_player_play_card)
-	_update_panel_textures()
-	_update_panel_lights_dark_to_light()
+	for i in 12:
+		self.update_panel(i, panel_statuses[i])
 
 
 func _on_global_state_change() -> void:
 	if Global.state == Global.State.Exiting:
 		self._update_panel_status_all_fade_except_opposite()
 	elif Global.state == Global.State.InBetween:
-		var empty_panel_idx = self.top_panel_idx + 11
+		# var empty_panel_idx = self.top_panel_idx + 11
+		var empty_panel_idx = player.current_panel_idx + 11
 		empty_panel_idx %= 12
-		self.top_panel_idx -= 2
+		self.top_panel_idx = player.current_panel_idx - 2
 		if self.top_panel_idx < 0:
 			self.top_panel_idx += 12
 
-		self.panel_statuses[empty_panel_idx] = PanelStatus.Empty
-		self._update_panel_textures()
-		self._update_panel_lights_dark_to_light()
+		self.update_panel(empty_panel_idx, PanelStatus.Empty)
+	elif Global.state == Global.State.Tutorial:
+		pass
 	else: # InLevel
 		for i in 12:
-			# panel_sprites[i].get_child(0).energy = 1
+			panel_sprites[i].get_child(0).energy = default_energy
 			panel_sprites[i].modulate = Color(1, 1, 1, 1)
-			panel_statuses[i] = PanelStatus.Normal
-		_update_panel_textures()
+			self.update_panel(i, PanelStatus.Normal)
 
 
 func _on_player_move(_move_sign: int, _current_panel_idx: int):
@@ -68,24 +74,16 @@ func _on_player_move(_move_sign: int, _current_panel_idx: int):
 
 
 func _on_player_play_card(card_key_idx: int):
-	if Global.state == Global.State.InLevel and card_key_idx <= 3:
+	if Global.state == Global.State.InLevel:
 		# build panel cards (key 1~5)
 		# FOR DEBUG
 		# self.debug_build(card_key_idx)
 		self.build_panel_from_clock_hand(card_key_idx)
-
-		# print(Global.get_current_level_goal())
-		# print(self.is_puzzle_complete(Global.get_current_level_goal()))
 		if self.is_puzzle_complete(Global.get_current_level_goal()):
 			Global.increment_current_level_puzzle()
-			# Global.current_puzzle_idx += 1
-			# if Global.current_puzzle_idx == 0:
-			# 	# load next level
-			# 	clock.modify_clock_lights_from_goal(Global.get_current_level_goal())
-			# else:
-			# 	# puzzle complete; enter exiting state
-			# 	clock.modify_clock_lights_from_goal("------------") # clear clock lights
-			# 	self._update_panel_status_all_fade_except_opposite()
+
+	if Global.state != Global.State.InLevel:
+		self.build_panel_from_clock_hand(card_key_idx)
 
 
 func _get_panel_status_from_card_idx(card_idx: int) -> PanelStatus:
@@ -140,11 +138,12 @@ func _get_opposite_panel_idx() -> int:
 
 func _update_panel_status_all_fade_except_opposite() -> void:
 	for i in 12:
-		panel_statuses[i] = PanelStatus.Fade
+		self.update_panel(i, PanelStatus.Fade)
 
 	# make the opposite of player's current panel the exit of "Exiting" floor
 	var opposite_panel_idx = self._get_opposite_panel_idx()
-	panel_statuses[opposite_panel_idx] = PanelStatus.Normal
+	self.update_panel(opposite_panel_idx, PanelStatus.Normal)
+	# panel_statuses[opposite_panel_idx] = PanelStatus.Normal
 	# panel_sprites[opposite_panel_idx].get_child(0).energy = 3
 	self.top_panel_idx = opposite_panel_idx
 	_update_panel_textures()
@@ -161,17 +160,18 @@ func trigger_global_freeze() -> void:
 
 
 func _update_panel_lights_dark_to_light() -> void:
-	var to_fill_idx = top_panel_idx + 1
-	to_fill_idx %= 12
+	pass
+	# var to_fill_idx = top_panel_idx + 1
+	# to_fill_idx %= 12
 
-	for dark_idx in 12:
-		var mod_val := dark_to_light_values[dark_idx]
-		# panel_sprites[to_fill_idx].get_child(0).energy = mod_val
-		panel_sprites[to_fill_idx].modulate = Color(mod_val, mod_val, mod_val, 1)
-		# panel_sprites[to_fill_idx].apply_scale
-		to_fill_idx += 1
-		if to_fill_idx == 12:
-			to_fill_idx = 0
+	# for dark_idx in 12:
+	# 	var mod_val := dark_to_light_values[dark_idx]
+	# 	# panel_sprites[to_fill_idx].get_child(0).energy = mod_val
+	# 	panel_sprites[to_fill_idx].modulate = Color(mod_val, mod_val, mod_val, 1)
+	# 	# panel_sprites[to_fill_idx].apply_scale
+	# 	to_fill_idx += 1
+	# 	if to_fill_idx == 12:
+	# 		to_fill_idx = 0
 
 
 func _update_panel_textures() -> void:

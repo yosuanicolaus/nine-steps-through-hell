@@ -1,26 +1,28 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4ol8oy37obhy"]
+[gd_scene load_steps=15 format=3 uid="uid://b4ol8oy37obhy"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_6xdhs"]
 [ext_resource type="Texture2D" uid="uid://cghsjky8yte8a" path="res://art/BG_1_Limbo.png" id="2_1in65"]
 [ext_resource type="PackedScene" uid="uid://n28l7gogwcfj" path="res://clock.tscn" id="2_6etqk"]
+[ext_resource type="Material" uid="uid://bpset76fopxn7" path="res://no_light_material.tres" id="2_475jd"]
 [ext_resource type="PackedScene" uid="uid://bfap0vi8mughm" path="res://player.tscn" id="3_qku0a"]
 [ext_resource type="Script" path="res://scripts/conductor.gd" id="4_2apkg"]
 [ext_resource type="AudioStream" uid="uid://gm02nsxqv73j" path="res://music/clock_tick_100bpm.wav" id="4_7qvwf"]
 [ext_resource type="PackedScene" uid="uid://bdrtn0cm3n100" path="res://demon.tscn" id="5_ukkis"]
 [ext_resource type="PackedScene" uid="uid://b8arvi67b661s" path="res://staircase.tscn" id="6_1ga4c"]
 [ext_resource type="AudioStream" uid="uid://bku6yxmil2065" path="res://music/Limbo v1.wav" id="7_xdbrr"]
-[ext_resource type="Texture2D" uid="uid://c5o6etxr6c5l" path="res://art/spotlight_1.png" id="9_fpb0h"]
+[ext_resource type="Texture2D" uid="uid://hbepumo023aq" path="res://art/tutorial_background.png" id="11_g1223"]
+[ext_resource type="Theme" uid="uid://meiddh52o801" path="res://font_theme.tres" id="12_kg6k7"]
+[ext_resource type="FontFile" uid="uid://cblh514fx4223" path="res://art/font_intruder.ttf" id="13_87fx7"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yfuya"]
-blend_mode = 1
-light_mode = 1
+[sub_resource type="Theme" id="Theme_64ege"]
+default_font = ExtResource("13_87fx7")
+default_font_size = 25
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6xdhs")
 
 [node name="Background" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_yfuya")
-scale = Vector2(1.37781, 1.37781)
+material = ExtResource("2_475jd")
 texture = ExtResource("2_1in65")
 
 [node name="Rotator" type="Node2D" parent="."]
@@ -40,7 +42,6 @@ rotation = 3.14159
 [node name="Metronome" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7qvwf")
 autoplay = true
-script = ExtResource("4_2apkg")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_xdbrr")
@@ -52,6 +53,7 @@ scale = Vector2(0.913684, 1)
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="."]
+material = ExtResource("2_475jd")
 offset_left = -911.0
 offset_top = -511.0
 offset_right = -832.0
@@ -59,8 +61,43 @@ offset_bottom = -488.0
 text = "Cards info
 "
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-821, -304)
-scale = Vector2(1.93638, 3.78346)
-energy = 2.6
-texture = ExtResource("9_fpb0h")
+[node name="Tutorial" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.768)
+texture = ExtResource("11_g1223")
+
+[node name="Label" type="Label" parent="Tutorial"]
+material = ExtResource("2_475jd")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1360.0
+offset_top = -1040.0
+offset_right = -560.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("12_kg6k7")
+text = "test label tutorial"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Tutorial"]
+material = ExtResource("2_475jd")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1051.5
+offset_top = -617.0
+offset_right = -868.5
+offset_bottom = -594.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_64ege")
+text = "press space to continue
+"

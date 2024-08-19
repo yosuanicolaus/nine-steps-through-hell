@@ -67,6 +67,8 @@ func _on_global_state_change() -> void:
 		self._set_clock_lights_off()
 	elif Global.state == Global.State.InBetween:
 		self._set_clock_lights_off()
+	elif Global.state == Global.State.Tutorial:
+		pass
 	else: # InLevel
 		self.modify_clock_lights_from_string(Global.get_current_level_goal())
 

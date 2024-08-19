@@ -44,21 +44,26 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ui_left') or Input.is_action_just_pressed('ui_right'):
 		press_beat_idx = Global.get_current_beat(action_time)
 		# FOR DEBUG MODE
-		# if true:
-		if press_beat_idx != -1 and last_move_beat_idx != press_beat_idx:
-			last_move_beat_idx = press_beat_idx
+		if true:
+		# if press_beat_idx != -1 and last_move_beat_idx != press_beat_idx:
+		# 	last_move_beat_idx = press_beat_idx
 
 			var move_sign = 1 if Input.is_action_just_pressed('ui_right') else -1
 			move_player(move_sign)
 			success_streak += 1
 
-	if Input.is_action_pressed('press_space'):  # hold space to control the long clock hand
+	if Input.is_action_just_pressed('press_space'):  # hold space to control the long clock hand
 		signal_player_control.emit()
 
-	var card_key_ids := [ "card_1", "card_2", "card_3", "card_4", "card_5", "card_q", "card_w", "card_e"]
-	for i in range(8):
-		if Input.is_action_pressed(card_key_ids[i]):
-			signal_player_play_card.emit(i)
+	if Input.is_action_pressed('card_1'):
+		signal_player_play_card.emit(0)
+	if Input.is_action_pressed('card_2'):
+		signal_player_play_card.emit(1)
+
+	if Global.unlock_panel_dark and Input.is_action_pressed('card_3'):
+		signal_player_play_card.emit(2)
+	if Global.unlock_panel_earth and Input.is_action_pressed('card_4'):
+		signal_player_play_card.emit(3)
 
 
 func move_player(move_sign: int) -> void:
