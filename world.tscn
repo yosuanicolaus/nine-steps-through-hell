@@ -101,3 +101,19 @@ grow_vertical = 0
 theme = SubResource("Theme_64ege")
 text = "press enter to continue
 "
+
+[node name="Title" type="Label" parent="."]
+material = ExtResource("2_475jd")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -167.5
+offset_top = -495.0
+offset_right = 167.5
+offset_bottom = -454.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("12_kg6k7")
+text = "Circle I : Limbo"

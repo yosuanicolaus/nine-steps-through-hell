@@ -10,13 +10,39 @@ extends Node2D
 @onready var label: Label = $Label
 @onready var tutorial_sprite: Sprite2D = $Tutorial
 @onready var tutorial_label: Label = $Tutorial/Label
+@onready var title: Label = $Title
 
+var background_idx := 0
+const BG_ART = [
+	preload('res://art/BG_1_Limbo.png'),
+	preload('res://art/BG_2_Lust.png'),
+	preload('res://art/BG_3_Gluttony.png'),
+	preload('res://art/BG_4_Greed.png'),
+	preload('res://art/BG_5_Anger.png'),
+	preload('res://art/BG_5_Anger.png'),
+	preload('res://art/BG_5_Anger.png'),
+	preload('res://art/BG_5_Anger.png'),
+	preload('res://art/BG_5_Anger.png'),
+]
+const TITLE_TEXTS = [
+	"Circle I : Limbo",
+	"Circle II : Lust",
+	"Circle III : Gluttony",
+	"Circle IV : Greed",
+	"Circle V : Anger",
+	"Circle VI : Heresy",
+	"Circle VII : Limbo",
+	"Circle VIII : Limbo",
+	"Circle IX : Limbo",
+]
+
+var title_fade_speed := 0.7
 var rotate_speed := 0.4
 var last_trigger = -1
 
 var background_start_scale := 1.3
 var background_end_scale := 1.0
-var background_scale_speed := 0.6
+var background_scale_speed := 0.3
 var background_fade_speed := 0.15
 
 var tutorial_idx := 0
@@ -36,6 +62,7 @@ var tutorial_texts: Array[String] = [
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	background.set_modulate(Color(1, 1, 1, 0))
+	title.set_modulate(Color(1,1,1,0))
 
 	player.signal_player_move.connect(_on_player_move)
 	player.signal_player_play_card.connect(_on_player_play_card)
@@ -52,15 +79,17 @@ func _process(delta: float) -> void:
 	if Global.state == Global.State.InLevel:
 		rotator.rotation_degrees += rotate_speed * delta
 		background.scale = lerp(
-			Vector2(background_start_scale, background_start_scale),
+			background.scale,
 			Vector2(background_end_scale, background_end_scale),
 			background_scale_speed * delta,
 		)
 		background.set_modulate(lerp(background.get_modulate(), Color(1, 1, 1, 1), background_fade_speed * delta))
 		background.rotation_degrees -= rotate_speed * delta
+		title.set_modulate(lerp(title.get_modulate(), Color(1, 1, 1, 1), title_fade_speed * delta))
 	else:
 		# background.set_modulate(lerp(background.get_modulate(), Color(1, 1, 1, 0), background_fade_speed * delta))
 		background.modulate = Color(1, 1, 1, 0)
+		title.set_modulate(lerp(title.get_modulate(), Color(1, 1, 1, 0), title_fade_speed * delta))
 
 	if Global.state == Global.State.Tutorial:
 		tutorial_sprite.modulate = Color(1, 1, 1, 0.85)
@@ -93,8 +122,11 @@ func _on_global_state_change():
 	print("ogsc")
 	print(Global.state)
 	if Global.state == Global.State.InLevel:
+		title.text = TITLE_TEXTS[self.background_idx]
+		background.texture = BG_ART[self.background_idx]
 		background.scale = Vector2(background_start_scale, background_start_scale)
 		background.set_modulate(Color(1, 1, 1, 0))
+		self.background_idx += 1
 	elif Global.state == Global.State.Tutorial:
 		self.play_tutorial()
 

@@ -44,9 +44,9 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ui_left') or Input.is_action_just_pressed('ui_right'):
 		press_beat_idx = Global.get_current_beat(action_time)
 		# FOR DEBUG MODE
-		if true:
-		# if press_beat_idx != -1 and last_move_beat_idx != press_beat_idx:
-		# 	last_move_beat_idx = press_beat_idx
+		# if true:
+		if press_beat_idx != -1 and last_move_beat_idx != press_beat_idx:
+			last_move_beat_idx = press_beat_idx
 
 			var move_sign = 1 if Input.is_action_just_pressed('ui_right') else -1
 			move_player(move_sign)

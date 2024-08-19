@@ -31,7 +31,7 @@ var state: State = State.InBetween:
 		elif state == State.Change:
 			# TODO change music here!
 			if change_idx == 0:
-				pass
+				self.bpm = 120
 			elif change_idx == 1:
 				pass
 
@@ -89,8 +89,6 @@ var scenarios: Array[State] = [
 	State.Change, # last music change
 	State.InBetween,
 	State.Tutorial, # earth panel
-	State.Exiting,
-	State.InBetween,
 	State.InLevel, # 7
 	State.Exiting,
 	State.InBetween,

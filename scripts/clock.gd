@@ -104,6 +104,8 @@ func modify_clock_lights_from_string(level_goal: String) -> void:
 			self._set_light_status(i, LightStatus.Holy)
 		elif level_goal[i] == "d": # dark -> purple
 			self._set_light_status(i, LightStatus.Dark)
+		elif level_goal[i] == "e": # earth -> green
+			self._set_light_status(i, LightStatus.Earth)
 
 
 func _set_clock_lights_off() -> void:
