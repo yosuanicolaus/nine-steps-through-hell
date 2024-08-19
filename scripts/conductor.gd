@@ -2,7 +2,7 @@ extends AudioStreamPlayer
 
 signal signal_audio_beat
 
-@export var song_bpm: float = 100.0
+@export var song_bpm: float = 120.0
 
 # https://www.reddit.com/r/godot/comments/15jqlqh/how_do_i_make_a_metronome_that_activates_triggers/
 # Tracking the signal_audio_beat and song position

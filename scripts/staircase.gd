@@ -72,8 +72,6 @@ func _on_player_move(_move_sign: int, _current_panel_idx: int):
 func _on_player_play_card(card_key_idx: int):
 	if Global.state == Global.State.InLevel:
 		# build panel cards (key 1~4)
-		# FOR DEBUG
-		# self.debug_build(card_key_idx)
 		self.build_panel_from_clock_hand(card_key_idx)
 		if self.is_puzzle_complete(Global.get_current_level_goal()):
 			Global.increment_current_level_puzzle()
@@ -100,6 +98,8 @@ func update_panel(panel_idx: int, panel_status: PanelStatus, energy=self.default
 
 
 func is_puzzle_complete(level_goal: String) -> bool:
+	# DEBUG MODE
+	# return true
 	for i in 12:
 		var goal_status = {
 			"-": PanelStatus.Normal,

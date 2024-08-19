@@ -11,6 +11,8 @@ extends Node2D
 @onready var tutorial_sprite: Sprite2D = $Tutorial
 @onready var tutorial_label: Label = $Tutorial/Label
 @onready var title: Label = $Title
+@onready var endgame: Sprite2D = $EndGame
+@onready var endgame_label: Label = $EndGame/Label
 
 var background_idx := 0
 const BG_ART = [
@@ -19,10 +21,10 @@ const BG_ART = [
 	preload('res://art/BG_3_Gluttony.png'),
 	preload('res://art/BG_4_Greed.png'),
 	preload('res://art/BG_5_Anger.png'),
-	preload('res://art/BG_5_Anger.png'),
-	preload('res://art/BG_5_Anger.png'),
-	preload('res://art/BG_5_Anger.png'),
-	preload('res://art/BG_5_Anger.png'),
+	preload('res://art/BG_6_Heresy.png'),
+	preload('res://art/BG_7_Violence.png'),
+	preload('res://art/BG_8_Fraud.png'),
+	preload('res://art/BG_9_Treachery.png'),
 ]
 const TITLE_TEXTS = [
 	"Circle I : Limbo",
@@ -31,18 +33,19 @@ const TITLE_TEXTS = [
 	"Circle IV : Greed",
 	"Circle V : Anger",
 	"Circle VI : Heresy",
-	"Circle VII : Limbo",
-	"Circle VIII : Limbo",
-	"Circle IX : Limbo",
+	"Circle VII : Violence",
+	"Circle VIII : Fraud",
+	"Circle IX : Treachery",
 ]
 
 var title_fade_speed := 0.7
 var rotate_speed := 0.4
 var last_trigger = -1
+var is_end_game := false
 
 var background_start_scale := 1.3
 var background_end_scale := 1.0
-var background_scale_speed := 0.3
+var background_scale_speed := 0.55
 var background_fade_speed := 0.15
 
 var tutorial_idx := 0
@@ -61,6 +64,7 @@ var tutorial_texts: Array[String] = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global._ready()
 	background.set_modulate(Color(1, 1, 1, 0))
 	title.set_modulate(Color(1,1,1,0))
 
@@ -70,6 +74,7 @@ func _ready() -> void:
 	Global.signal_global_state_change.connect(_on_global_state_change)
 
 	tutorial_sprite.modulate = Color(1, 1, 1, 0)
+	endgame.modulate = Color(1,1,1,0)
 	_on_global_state_change()  # manual trigger because Global was spawned first
 	_update_label()
 
@@ -99,6 +104,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('press_enter'):
 		unfreeze_world()
 
+	if self.is_end_game:
+		endgame_label.text = "Total Beats : %s" % str(Global.beat_idx)
+		endgame.set_modulate(lerp(endgame.get_modulate(), Color(1, 1, 1, 1), background_fade_speed * delta))
+
 
 func _on_player_move(_move_sign: int, _current_panel_idx: int):
 	_update_label()
@@ -109,6 +118,8 @@ func _on_player_play_card(_card_key_id: int):
 
 
 func unfreeze_world():
+	if self.is_end_game: # can't freeze, game's ending!
+		return
 	if Global.in_freeze:
 		Global.in_freeze = false
 		Global.set_state_to_next_scenario() # exit tutorial
@@ -149,17 +160,4 @@ func play_tutorial():
 
 
 func _update_label() -> void:
-	label.text = '\n'.join([
-		"STATE: %s" % str(Global.state),
-		"Beat: %s" % str(Global.beat_idx),
-		"current_level_idx: %s" % str(Global.current_level_idx),
-		"current_puzzle_idx: %s" % str(Global.current_puzzle_idx),
-		"In Freeze: %s" % str(Global.in_freeze),
-		"clock1_panel_idx: %s" % str(clock.clock1_panel_idx),
-		"clock2_panel_idx: %s" % str(clock.clock2_panel_idx),
-		"player current panel idx: %s" % str(player.current_panel_idx),
-		"player rotation deg: %s" % str(player.rotation_degrees),
-		"demon current panel idx: %s" % str(demon.current_panel_idx),
-		"demon rotation deg: %s" % str(demon.rotation_degrees),
-		"stair top panel idx: %s" % str(staircase.top_panel_idx),
-	])
+	label.text = "Total Beats : %s" % str(Global.beat_idx)

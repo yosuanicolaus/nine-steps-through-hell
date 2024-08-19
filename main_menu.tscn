@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://6kuc1qjfgn23"]
+
+[ext_resource type="Theme" uid="uid://meiddh52o801" path="res://font_theme.tres" id="1_07t1s"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_nh17v"]
+[ext_resource type="AudioStream" uid="uid://bku6yxmil2065" path="res://music/Limbo v1.wav" id="3_6vj7i"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_nh17v")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_07t1s")
+text = "Stairway to Hell"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = 156.0
+offset_right = 53.5
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_07t1s")
+text = "Play"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6vj7i")
+autoplay = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -5,13 +5,13 @@ signal signal_global_puzzle_change
 signal signal_global_state_change
 
 
-var bpm: int = 100:
+var bpm: int = 120:
 	set(val):
 		bpm = val
 		beat_wait_time = 60.0 / val
 var beat_wait_time: float = 60.0 / bpm
 var timer := Timer.new()
-var beat_idx = 1
+var beat_idx = 0
 
 var in_freeze := false
 var change_idx = 0
@@ -29,11 +29,14 @@ var state: State = State.InBetween:
 			self.in_freeze = true
 			pass
 		elif state == State.Change:
-			# TODO change music here!
+			# future todo: change music here!
 			if change_idx == 0:
-				self.bpm = 120
+				pass
 			elif change_idx == 1:
 				pass
+			elif change_idx == 2:  # END GAME fade to white
+				self.in_freeze = true
+				world.is_end_game = true
 
 			change_idx += 1
 			state = State.InBetween
@@ -117,12 +120,13 @@ var unlock_panel_earth := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	add_child(timer)
-	timer.wait_time = beat_wait_time
-	timer.timeout.connect(_make_beat)
-	music.signal_audio_beat.connect(_on_first_metronome_beat)
-	player.signal_player_move.connect(_on_player_move)
-	self.set_state_to_next_scenario()
+	if self.world:
+		add_child(timer)
+		timer.wait_time = beat_wait_time
+		timer.timeout.connect(_make_beat)
+		music.signal_audio_beat.connect(_on_first_metronome_beat)
+		player.signal_player_move.connect(_on_player_move)
+		self.set_state_to_next_scenario()
 
 
 func _on_first_metronome_beat():
@@ -180,4 +184,6 @@ func increment_current_level_puzzle() -> void:
 
 func _make_beat():
 	# print("GLOBAL: beat ", beat_idx )
+	if self.in_freeze:
+		return
 	beat_idx += 1
