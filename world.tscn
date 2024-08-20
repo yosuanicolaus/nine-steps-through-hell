@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bdrtn0cm3n100" path="res://demon.tscn" id="5_ukkis"]
 [ext_resource type="PackedScene" uid="uid://b8arvi67b661s" path="res://staircase.tscn" id="6_1ga4c"]
 [ext_resource type="AudioStream" uid="uid://cdnfho7466m82" path="res://music/clock_tick_120bpm.wav" id="8_eo8rt"]
-[ext_resource type="AudioStream" uid="uid://qss5pjimjc8b" path="res://music/kevin_mcleod_floating_cities.mp3" id="9_kqsu0"]
+[ext_resource type="AudioStream" uid="uid://c2i7htdt1ibwe" path="res://music/macleod120_loop3.ogg" id="9_yukny"]
 [ext_resource type="Texture2D" uid="uid://hbepumo023aq" path="res://art/tutorial_background.png" id="11_g1223"]
 [ext_resource type="Theme" uid="uid://meiddh52o801" path="res://font_theme.tres" id="12_kg6k7"]
 [ext_resource type="FontFile" uid="uid://cblh514fx4223" path="res://art/font_intruder.ttf" id="13_87fx7"]
@@ -49,7 +49,7 @@ stream = ExtResource("8_eo8rt")
 autoplay = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_kqsu0")
+stream = ExtResource("9_yukny")
 autoplay = true
 script = ExtResource("4_2apkg")
 

@@ -111,11 +111,11 @@ var unlock_clock_hand2 := false
 var unlock_panel_dark := false
 var unlock_panel_earth := false
 
-@onready var world: World = get_node("/root/World")
-@onready var player: Player = get_node("/root/World/Rotator/Player")
-@onready var clock: Clock = get_node("/root/World/Rotator/Clock")
-@onready var staircase: Staircase = get_node("/root/World/Rotator/Staircase")
-@onready var music = get_node("/root/World/Music")
+@onready var world: World = get_node_or_null("/root/World")
+@onready var player: Player = get_node_or_null("/root/World/Rotator/Player")
+@onready var clock: Clock = get_node_or_null("/root/World/Rotator/Clock")
+@onready var staircase: Staircase = get_node_or_null("/root/World/Rotator/Staircase")
+@onready var music = get_node_or_null("/root/World/Music")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -137,7 +137,6 @@ func _on_first_metronome_beat():
 
 func _on_player_move(_move_sign, _new_panel_id):
 	if player.current_panel_idx == staircase.top_panel_idx:
-		print("player on top panel")
 		if self.state == State.Exiting or self.state == State.InBetween:
 			self.set_state_to_next_scenario()
 

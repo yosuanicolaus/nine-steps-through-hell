@@ -75,7 +75,6 @@ func move_player(move_sign: int) -> void:
 	var goal_panel_idx = current_panel_idx + 1 if move_sign == 1 else current_panel_idx - 1
 	goal_panel_idx %= 12
 	if staircase.panel_statuses[goal_panel_idx] == PanelStatus.Empty:
-		print("can't move to empty panel")
 		return  # can't move to empty panel
 
 	self.rotation_degrees += 30 * move_sign

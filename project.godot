@@ -10,10 +10,35 @@ config_version=5
 
 [application]
 
-config/name="gmtk24-built-to-scale"
+config/name="nine-steps-through-hell"
+config/description="Welcome to the depths, where every step brings you closer to salvation—or deeper into damnation.
+
+Nine Steps Through Hell is a rhythm-based, time-twisting journey through the nine circles of hell. As a condemned soul, you must climb an endless staircase through the inferno, facing increasing challenges as you ascend toward the final judgment.
+
+Key Features:
+
+    Rhythmic Movement: Move in sync with the cursed clock. Time your steps perfectly with the left and right arrow keys, or be frozen in place, vulnerable to the abyss.
+    Time Manipulation: Reverse time’s flow by holding the spacebar, altering your path and creating opportunities to outwit the infernal dangers.
+    Strategic Building: Construct normal, holy, dark, or earth panels on the staircase. Build wisely to match the level’s demands and fend off the lurking threats.
+    Demonic Pursuit: A relentless demon chases you. If it catches you, your path will be corrupted. Use its curse to your advantage or banish it with holy power—temporarily.
+    Dual Clock Challenge: As you ascend, a second clock hand appears, doubling the complexity. Master controlling both to conquer the most treacherous levels. 
+
+Will you conquer the Ninth Circle or fall to eternal darkness?
+
+Climb through the circles, face the trials, and discover your fate in Nine Steps Through Hell—a dark, rhythmic adventure that tests your mind, reflexes, and resolve.
+
+
+This game was made for the GMTK 2024 jam with a theme of \"Built to Scale\".
+
+    Cryodawn - programmer
+    Taya80 - artist
+    Ramazir - SFX and main menu music
+    Kevin MacLeod (royalty free music) - main track music
+"
+config/version="0.1.3"
 run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://art/gmtk24_icon.png"
 
 [autoload]
 

@@ -53,9 +53,9 @@ var tutorial_fade_speed := 1.2
 var tutorial_texts: Array[String] = [
 	"""Synchronize thy steps with the cursed clock. Use the left and right arrows, but only on the beat of the clock to move forward. Misstep, and thou shalt be frozen in place.""",
 	"""At the heart of thy journey lies the demon’s clock. Hold spacebar to reverse its hand, altering time’s flow.""",
-	"""When the clock’s hand points to a panel, press "1" to build a normal panel, or press "2" to erect a holy panel.""",
+	"""When the clock’s hand points to a panel, press "1" to build a normal panel, or press "2" to build a holy panel.""",
 	"""The level now unfolds. The clock shall reveal a light indicator: no light demands a normal panel, while a yellow light calls for a holy panel. Ensure all panels match the light’s command to pass the level.""",
-	"""Summon the darkness by pressing "3" to place a dark panel where the clock hand points. This cursed power can bring either fortune or doom.""",
+	"""You have now acquired the dark power. Press "3" to build a dark panel where the clock hand points.""",
 	"""A demon now awakens, hunting thee down. Should it reach thee, all panels will turn dark. Yet, in this curse lies opportunity—use it if dark panels serve thy cause. Banish the demon by placing a holy panel where it stands, but know it will return, relentless, 'till the level ends.""",
 	"""A second clock hand now appears, beyond thy control, moving with every second beat. All panels built henceforth shall appear where both hands point. Master this chaos, and thou mayest rise to power.""",
 	"""Press "4" to summon earth panels where both clock hands point. These solid foundations shall aid thee in thy treacherous ascent.""",
@@ -133,8 +133,6 @@ func _on_global_beat():
 
 
 func _on_global_state_change():
-	print("ogsc")
-	print(Global.state)
 	if Global.state == Global.State.InLevel:
 		title.text = TITLE_TEXTS[self.background_idx]
 		background.texture = BG_ART[self.background_idx]

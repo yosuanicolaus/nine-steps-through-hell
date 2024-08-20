@@ -80,7 +80,6 @@ func _on_global_state_change() -> void:
 
 
 func _set_light_status(idx: int, light_status: LightStatus) -> void:
-	print("setlightstatus ", idx, " , ", light_status)
 	self.light_statuses[idx] = light_status
 	if light_status == LightStatus.Off:
 		self.light_nodes[idx].energy = 0
