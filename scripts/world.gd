@@ -106,7 +106,10 @@ func _process(delta: float) -> void:
 
 	if self.is_end_game:
 		endgame_label.text = "Total Beats : %s" % str(Global.beat_idx)
-		endgame.set_modulate(lerp(endgame.get_modulate(), Color(1, 1, 1, 1), background_fade_speed * delta))
+		rotator.visible = false
+		endgame.modulate = Color(1, 1, 1, 1)
+		# endgame.set_modulate(lerp(endgame.get_modulate(), Color(1, 1, 1, 1), background_fade_speed * delta))
+		# rotator.set_modulate(lerp(rotator.get_modulate(), Color(1, 1, 1, 0), background_fade_speed * delta))
 
 
 func _on_player_move(_move_sign: int, _current_panel_idx: int):

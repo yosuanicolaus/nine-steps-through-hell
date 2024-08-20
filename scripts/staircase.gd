@@ -10,6 +10,7 @@ var dark_to_light_values: Array[float] = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.88, 0.
 	$Panel7/Sprite, $Panel8/Sprite, $Panel9/Sprite, $Panel10/Sprite, $Panel11/Sprite, $Panel12/Sprite,
 ]
 @onready var player: Player = get_node("../Player")
+@onready var demon: Demon = get_node("../Demon")
 @onready var clock: Clock = get_node("../Clock")
 
 enum PanelStatus {Normal, Holy, Dark, Earth, Empty, Fade}
@@ -117,6 +118,14 @@ func build_panel_from_clock_hand(card_idx: int) -> void:
 	panel_statuses[clock.clock1_panel_idx] = _get_panel_status_from_card_idx(card_idx)
 	if Global.unlock_clock_hand2:
 		panel_statuses[clock.clock2_panel_idx] = _get_panel_status_from_card_idx(card_idx)
+
+	# if build holy panel on demon
+	if card_idx == 1 and Global.unlock_demon and (
+		demon.current_panel_idx == clock.clock1_panel_idx or
+		(Global.unlock_clock_hand2 and clock.clock2_panel_idx == demon.current_panel_idx)):
+		demon.demon_active = false
+		demon.respawn_timer.start()
+
 	_update_panel_textures()
 
 
